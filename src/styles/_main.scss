@@ -1,0 +1,31 @@
+// Globals
+@import 'styles/_colors.scss';
+@import 'styles/_globals.scss';
+
+// Pages
+@import 'components/Dashboard.scss';
+@import 'components/About.scss';
+
+// Modals
+@import 'components/modals/Modal.scss';
+@import 'components/modals/AddWidgetModal.scss';
+@import 'components/modals/SelectDashboardModal.scss';
+
+// Components
+@import 'components/Loading.scss';
+@import 'components/Menu.scss';
+@import 'components/panels/Panel.scss';
+@import 'components/TextBox.scss';
+@import 'components/InfoIcon.scss';
+@import 'components/DataSource.scss';
+
+// Widgets
+@import 'components/widgets/_common.scss';
+@import 'components/widgets/Wallet/WalletPanel.scss';
+@import 'components/widgets/RecentTransactions/RecentTransactionsPanel.scss';
+@import 'components/widgets/MirrorAssets/MirrorAssetsPanel.scss';
+@import 'components/widgets/WidgetMissing/WidgetMissingPanel.scss';
+@import 'components/widgets/WidgetError/WidgetErrorPanel.scss';
+@import 'components/widgets/WalletValidators/WalletValidatorsPanel.scss';
+@import 'components/widgets/EmbeddedImage/EmbeddedImagePanel.scss';
+@import 'components/widgets/MineProjects/MineProjectsPanel.scss';

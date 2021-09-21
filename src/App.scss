@@ -1,0 +1,61 @@
+@import 'styles/_main.scss';
+
+#app-component {
+  position: relative;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  color: $txt-1;
+  background-color: $bg-3;
+  min-width: 320px;
+  min-height: 100vh;
+
+  #app-loading {
+    position: absolute;
+    display: grid;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    color: $txt-1;
+  }
+
+  #header {
+    display: grid;
+    background-color: $bg-1;
+    box-shadow: $shadow-1 0px 2px 4px;
+    z-index: 1;
+
+    #header-container {
+      display: grid;
+      grid-template-columns: 1fr min-content;
+      margin: auto;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    #header-title {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 24px;
+      align-items: center;
+
+      svg {
+        margin: 0px 12px;
+        height: 60px;
+      }
+    }
+
+    #header-icons {
+      display: flex;
+
+      svg {
+        cursor: pointer;
+        margin: auto 12px;
+      }
+    }
+  }
+
+  #page-content {
+    position: relative;
+  }
+}

@@ -1,0 +1,25 @@
+#wallet-validators-component {
+    overflow: auto;
+
+    #graph-container {
+        margin: 20px auto;
+        width: 200px;
+        height: 200px;
+    }
+
+    .validator-container {
+
+        .validator-moniker {
+            margin: 20px 12px 12px 12px;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .validator-details {
+            font-size: 20px;
+            text-align: center;
+            justify-content: center;
+        }
+    }
+}

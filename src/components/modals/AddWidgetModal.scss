@@ -1,0 +1,54 @@
+.add-widget-modal-component {
+
+    &.widgets-modal {
+        display: grid;
+        grid-template-rows: 60px 70px 1fr;
+    }
+
+    #filter-input {
+        margin: 10px;
+    }
+
+    #widget-groups {
+        overflow: auto;
+        padding: 10px;
+    }
+
+    .widget-group-title {
+        font-size: 24px;
+        text-align: center;
+        background-color: $bg-2;
+        padding: 6px;
+        border-radius: 6px;
+    }
+
+    .widget-list {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        margin: 20px 0px;
+
+        .widget-item {
+            display: grid;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            background-color: $bg-2;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 6px;
+            padding: 6px;
+            box-shadow: $shadow-1 2px 2px 4px;
+
+            &:hover {
+                background-color: $bg-3;
+            }
+
+            div {
+                margin: auto;
+                z-index: 1;
+            }
+        }
+    }
+}

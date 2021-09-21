@@ -1,0 +1,86 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $bg-3;
+    border-radius: 5px;
+
+    &:hover {
+        background: $bg-1;
+    }
+}
+
+// Inputs
+input[type=checkbox] {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+select {
+    display: block;
+    outline: none;
+    width: 100%;
+    background-color: $bg-1;
+    color: $txt-1;
+    background-color: $bg-3;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 6px 0px;
+    height: 46px;
+    padding: 12px;
+    border-style: none;
+    cursor: pointer;
+}
+
+label {
+    font-style: italic;
+}
+
+input[type=text],
+input[type=number] {
+    display: block;
+    border-radius: 6px;
+    color: $txt-1;
+    background-color: $bg-3;
+    border: none;
+    margin: 6px 0px;
+    font-size: 24px;
+    height: 46px;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+// Other
+@mixin no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+body {
+    background-color: $bg-1;
+    margin: 0;
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}

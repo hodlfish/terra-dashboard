@@ -1,0 +1,32 @@
+.theme-light {
+    --bg-1: #ffffff;
+    --bg-2: #f0f0f0;
+    --bg-3: #e2e2e2;
+    --txt-1: #414141;
+    --txt-2: #494949;
+    --shadow-1: #0000003a;
+    --icon-1: #73a9ff;
+    --icon-2: #6889ff;
+    --error: #ff6464;
+}
+.theme-dark {
+    --bg-1: #141414;
+    --bg-2: #1F1F1F;
+    --bg-3: #292929;
+    --txt-1: #d3d3d3;
+    --txt-2: #d3d3d3;
+    --shadow-1: #000000aa;
+    --icon-1: #66adff;
+    --icon-2: #55779d;
+    --error: #ff6464;
+}
+
+$bg-1: var(--bg-1);
+$bg-2: var(--bg-2);
+$bg-3: var(--bg-3);
+$shadow-1: var(--shadow-1);
+$txt-1: var(--txt-1);
+$txt-2: var(--txt-2);
+$icon-1: var(--icon-1);
+$icon-2: var(--icon-2);
+$error: var(--error);

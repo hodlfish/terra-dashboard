@@ -1,0 +1,36 @@
+#pylon-projects {
+    overflow: auto;
+
+    .project-block {
+        border-radius: 8px;
+        background: $bg-1;
+        color: $txt-1;
+        box-shadow: $shadow-1 2px 2px 4px;
+        border-radius: 6px;
+        padding: 12px;
+        background-color: $bg-1;
+        margin: 12px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $bg-3;
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        svg {
+            fill: $icon-1;
+            width: 32px;
+            height: 32px;
+            margin: 6px;
+
+            &:hover {
+                fill: $icon-2;
+            }
+        }
+    }
+}

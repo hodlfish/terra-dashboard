@@ -1,0 +1,74 @@
+{
+    "uluna": {
+        "symbol": "Luna",
+        "icon": "https://assets.terra.money/icon/60/Luna.png"
+    },
+    "uaud": {
+        "symbol": "AUT",
+        "icon": "https://assets.terra.money/icon/60/AUT.png"
+    },
+    "ucad": {
+        "symbol": "CAT",
+        "icon": "https://assets.terra.money/icon/60/CAT.png"
+    },
+    "uchf": {
+        "symbol": "CHT",
+        "icon": "https://assets.terra.money/icon/60/CHT.png"
+    },
+    "ucny": {
+        "symbol": "CNT",
+        "icon": "https://assets.terra.money/icon/60/CNT.png"
+    },
+    "udkk": {
+        "symbol": "DKT",
+        "icon": "https://assets.terra.money/icon/60/DKT.png"
+    },
+    "ueur": {
+        "symbol": "EUT",
+        "icon": "https://assets.terra.money/icon/60/EUT.png"
+    },
+    "ugbp": {
+        "symbol": "GBT",
+        "icon": "https://assets.terra.money/icon/60/GBT.png"
+    },
+    "uhkd": {
+        "symbol": "HKT",
+        "icon": "https://assets.terra.money/icon/60/HKT.png"
+    },
+    "uinr": {
+        "symbol": "INT",
+        "icon": "https://assets.terra.money/icon/60/INT.png"
+    },
+    "ujpy": {
+        "symbol": "JPT",
+        "icon": "https://assets.terra.money/icon/60/JPT.png"
+    },
+    "ukrw": {
+        "symbol": "KRT",
+        "icon": "https://assets.terra.money/icon/60/KRT.png"
+    },
+    "umnt": {
+        "symbol": "MNT",
+        "icon": "https://assets.terra.money/icon/60/MNT.png"
+    },
+    "usdr": {
+        "symbol": "SDT",
+        "icon": "https://assets.terra.money/icon/60/SDT.png"
+    },
+    "usek": {
+        "symbol": "SET",
+        "icon": "https://assets.terra.money/icon/60/SET.png"
+    },
+    "usgd": {
+        "symbol": "SGT",
+        "icon": "https://assets.terra.money/icon/60/SGT.png"
+    },
+    "uthb": {
+        "symbol": "THT",
+        "icon": "https://assets.terra.money/icon/60/THT.png"
+    },
+    "uusd": {
+        "symbol": "UST",
+        "icon": "https://assets.terra.money/icon/60/UST.png"
+    }
+}

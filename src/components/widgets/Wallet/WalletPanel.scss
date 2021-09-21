@@ -1,0 +1,23 @@
+#wallet-panel-component {
+    padding: 8px;
+    overflow: auto;
+
+    .wallet-balance {
+        display: grid;
+        grid-template-columns: 40px 1fr 1fr;
+        grid-template-rows: min-content;
+
+        img {
+            margin: 4px;
+        }
+    
+        .name {
+            margin: auto 0px;
+        }
+    
+        .balance {
+            margin: auto 0px;
+            text-align: right;
+        }
+    }
+}

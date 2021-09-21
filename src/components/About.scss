@@ -1,0 +1,107 @@
+#about-component {
+    position: relative;
+    display: grid;
+    grid-template-rows: 60px 1fr;
+
+    #about-toolbar {
+        background-color: $bg-2;
+        box-shadow: $shadow-1 0px 2px 4px;
+        height: 60px;
+
+        #about-toolbar-container {
+            max-width: 1200px;
+            width: 100%;
+            height: 60px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-template-columns: 1fr max-content;
+
+            svg {
+                fill: $icon-1;
+                margin: 12px;
+                cursor: pointer;
+            }
+
+            div {
+                font-weight: bold;
+                color: $icon-1;
+                cursor: pointer;
+            }
+
+            .twitter {
+                fill: $icon-1;
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+
+    #about-content {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow: auto;
+        padding: 12px;
+
+        .info-container {
+            position: relative;
+            display: grid;
+            grid-template-rows: 60px 1fr;
+            flex: auto;
+            flex-basis: 300px;
+            max-width: 320px;
+            min-width: 240px;
+            background-color: $bg-2;
+            box-shadow: $shadow-1 2px 2px 4px;
+            margin: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+
+            .info-container-header {
+                position: relative;
+                display: grid;
+                background-color: $bg-1;
+                box-shadow: $shadow-1 0px 2px 4px;
+
+                .info-container-title {
+                    text-align: center;
+                    width: 100%;
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin: auto;
+                }
+    
+                svg {
+                    position: absolute;
+                    left: 0px;
+                    right: 0px;
+                    margin: 14px;
+                }
+
+                .twitter {
+                    fill: $icon-1;
+                    width: 32px;
+                    height: 32px;
+                }
+
+                .download {
+                    fill: $icon-1;
+                }
+            }
+
+            .info-container-content {
+                padding: 24px;
+                line-height: 26px;
+                font-size: 16px;
+
+                span {
+                    color: $icon-1;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

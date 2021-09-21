@@ -1,0 +1,82 @@
+#text-box-component {
+    position: relative;
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+
+    #text-edit {
+        height: 60px;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        min-width: 200px;
+        z-index: 1;
+
+        input {
+            margin: 9px 6px;
+            // width: max-content;
+        }
+
+        button {
+            display: block;
+            background-color: transparent;
+            box-sizing: border-box;
+            margin: 0px !important;
+            padding: 0px !important;
+            border-width: 0px;
+            border-style: none;
+            cursor: pointer;
+
+            &:hover .button-icon {
+                fill: $icon-2;
+            }
+
+            .button-icon {
+                fill: $icon-1;
+                margin: auto 10px;
+            }
+        }
+    }
+
+    #text-display {
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        display: flex;
+        z-index: 1;
+
+        #display-value {
+            height: 60px;
+            font-size: 24px;
+            color: var(--txt-1);
+            text-overflow: ellipsis;
+            line-height: 60px;
+            overflow: hidden;
+        }
+
+        &:hover #edit-icon {
+            display: block;
+        }
+
+        #edit-icon {
+            display: none;
+            fill: $icon-1;
+            margin: auto 10px;
+            min-width: 24px;
+            cursor: pointer;
+    
+            &:hover {
+                fill: $icon-2;
+            }
+        }
+    }
+
+    .hidden {
+        opacity: 0 !important;
+        z-index: -1 !important;
+    }
+}

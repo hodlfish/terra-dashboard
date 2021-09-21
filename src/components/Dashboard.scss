@@ -1,0 +1,72 @@
+#dashboard-component {
+    position: relative;
+    display: grid;
+    grid-template-rows: 60px 1fr;
+
+    #dashboard-toolbar {
+        background-color: $bg-2;
+        display: grid;
+        box-shadow: $shadow-1 0px 2px 4px;
+
+        #dashboard-toolbar-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr max-content;
+
+            .dashboard-tool {
+                fill: $icon-1;
+                margin: auto 10px;
+                cursor: pointer;
+
+                &:hover {
+                    fill: $icon-2;
+                }
+            }
+
+            #dashboard-title {
+                display: flex;
+            }
+    
+            #dashboard-tools {
+                display: flex;
+            }
+        }
+    }
+
+    #dashboard-content {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow: auto;
+        padding: 12px;
+
+        #add-widget-button {
+            position: relative;
+            display: grid;
+            background: $bg-2;
+            box-shadow: $shadow-1 2px 2px 4px;
+            border-radius: 12px;
+            margin: 10px;
+            flex: 0;
+            flex-basis: 240px;
+            min-width: 240px;
+            max-width: 240px;
+            height: 240px;
+            cursor: pointer;
+
+            svg {
+                fill: $txt-1;
+                margin: auto;
+                width: 128px;
+                height: 128px;
+            }
+
+            &:hover svg {
+                fill: $icon-1;
+            }
+        }
+    }
+}

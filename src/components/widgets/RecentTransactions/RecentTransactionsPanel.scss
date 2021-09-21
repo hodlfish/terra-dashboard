@@ -1,0 +1,45 @@
+#recent-transactions-component {
+    overflow: auto;
+
+    .transaction-container:nth-child(odd) {
+        background-color: $bg-1;
+    }
+
+    .transaction-container {
+        display: grid;
+        grid-template-columns: max-content 1fr max-content;
+        height: 60px;
+
+        .memo-container {
+            position: relative;
+            display: grid;
+            overflow: hidden;
+
+            .memo {
+                margin: auto;
+                text-align: center;
+                font-style: italic;
+                white-space: nowrap;
+                overflow:hidden;
+            }
+        }
+
+        .datetime {
+            margin: auto 10px;
+            font-weight: bold;
+        }
+
+        .links {
+            display: flex;
+
+            a {
+                margin: auto 6px;
+
+                img {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+        }
+    }
+}

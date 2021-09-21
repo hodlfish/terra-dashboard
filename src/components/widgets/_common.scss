@@ -1,0 +1,222 @@
+#settings-form {
+    position: relative;
+    padding: 24px;
+    overflow: auto;
+
+    #settings-button-container {
+        display: flex;
+        justify-content: center;
+
+        @mixin settings-button {
+            text-align: center;
+            line-height: 40px;
+            margin: 12px;
+            outline: none;
+            background-color: $bg-3;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 400;
+            width: 100px;
+            height: 40px;
+            color: $txt-1;
+            border: none;
+            border-style: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $bg-1;
+            }
+        }
+
+        button {
+            @include settings-button;
+        }
+
+        div {
+            @include settings-button;
+        }
+    }
+}
+
+.labeled-graph-widget {
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: 1fr;
+
+    .graph-label {
+        font-size: 24px;
+        padding: 12px;
+    }
+
+    .graph-container {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.small-data-list-widget {
+    position: relative;
+    overflow: hidden;
+
+    .data-list {
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 4px 16px;
+        height: 100%;
+        z-index: 1;
+        box-sizing: border-box;
+
+        .data-item {
+            margin: 6px 0px;
+            
+            .title {
+                font-size: 18px;
+            }
+        
+            .data {
+                display: flex;
+                font-size: 32px;
+                font-weight: bold;
+                text-overflow: ellipsis;
+                overflow: hidden;
+
+                div {
+                    display: inline;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+
+                img {
+                    display: inline;
+                    height: 32px;
+                    width: 32px;
+                    margin: 2px;
+                    color: transparent;
+                }
+            }
+        }
+    }
+
+    .space-evenly {
+        justify-content: space-between;
+    }
+
+    svg {
+        position:absolute;
+        height: 100%;
+        top: 0px;
+        left: 50%;
+        opacity: 0.1;
+        pointer-events: none;
+        -webkit-filter: blur(3px);
+        -moz-filter: blur(3px);
+        -o-filter: blur(3px);
+        -ms-filter: blur(3px);
+        filter: blur(3px);
+    }
+
+    .background-img {
+        position:absolute;
+        height: 80%;
+        top: 10%;
+        left: 50%;
+        opacity: 0.1;
+        pointer-events: none;
+        -webkit-filter: blur(3px);
+        -moz-filter: blur(3px);
+        -o-filter: blur(3px);
+        -ms-filter: blur(3px);
+        filter: blur(3px);
+    }
+}
+
+
+.proposal-widget {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .proposal {
+        display: grid;
+        grid-template-rows: max-content 1fr 40px;
+        width: 252px;
+        min-height: min-content;
+        box-shadow: $shadow-1 2px 2px 4px;
+        border-radius: 6px;
+        padding: 12px;
+        background-color: $bg-1;
+        margin: 12px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $bg-3;
+        }
+
+        .proposal-title {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .proposal-deposit {
+            margin: auto;
+        }
+        
+        .proposal-graph-container {
+            width: 120px;
+            height: 120px;
+            margin: auto;
+
+        }
+
+        .proposal-end-date {
+            margin-top: 12px;
+            text-align: center;
+            margin: auto;
+        }
+    }
+
+    .no-proposals {
+        margin: auto;
+        font-size: 24px;
+        font-style: italic;
+    }
+
+    .proposal-block {
+        display: grid;
+        width: 100%;
+        border-radius: 8px;
+        background: $bg-1;
+        color: $txt-1;
+        margin: 10px;
+        padding: 10px;
+    
+
+
+        .proposal-deposit {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .proposal-graph-container {
+            width: 240px;
+            display: flex;
+            margin: auto;
+        }
+        
+        .proposal-description {
+            margin: 12px;
+            white-space: pre-line;
+
+            a {
+                color: $icon-1;
+            }
+        }
+    }   
+}

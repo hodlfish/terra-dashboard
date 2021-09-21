@@ -1,0 +1,36 @@
+#info-icon-component {
+    position: relative;
+
+    svg {
+        fill: $icon-1;
+        cursor: pointer;
+
+        &:hover {
+            fill: $icon-2;
+        }
+
+        &:hover + div {
+            display: block;
+        }
+    }
+
+    div {
+        display: none;
+        position: absolute;
+        max-width: 200px;
+        padding: 9px;
+        border-radius: 6px;
+        background-color: $bg-3;
+        box-shadow: $shadow-1 2px 2px 4px;
+    }
+
+    .hang-right {
+        top: 0px;
+        left: 20px;
+    }
+
+    .hang-left {
+        top: 0px;
+        right: 20px;
+    }
+}

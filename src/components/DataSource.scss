@@ -1,0 +1,31 @@
+#data-source-component {
+    display: flex;
+    flex-wrap: wrap;
+    font-style: italic;
+    text-decoration: none;
+    margin-bottom: 20px;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: $txt-1;
+    }
+
+    .label {
+        margin: auto 6px;
+    }
+
+    a {
+        color: $icon-1;
+        text-decoration: none;
+        font-weight: bold;
+
+        &:active {
+            color: $icon-1;
+        }
+
+        &:visited {
+            color: $icon-1;
+        }
+    }
+}

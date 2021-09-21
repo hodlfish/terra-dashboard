@@ -1,0 +1,64 @@
+#modal-component {
+    position: fixed;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    
+    #modal-background {
+        position: absolute;
+        z-index: 0;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-color: $bg-3;
+        opacity: 0.7;
+    }
+
+    #modal-content {
+        position: relative;
+        background-color: $bg-1;
+        z-index: 1;
+        width: 90vw;
+        max-width: 600px;
+        height: min-content;
+        max-height: unquote("min(800px, 90vh)");
+        margin: auto;
+        border-radius:12px;
+        padding: 12px;
+        box-shadow: $shadow-1 0px 2px 4px;
+        overflow: hidden;
+
+        #title {
+            text-align: center;
+            font-size: 32px;
+            padding: 12px;
+        }
+
+        #close-modal-button {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            cursor: pointer;
+            fill: $icon-1;
+            margin: 12px;
+
+            &:hover {
+                fill: $icon-2;
+            }
+        }
+
+        &.modal-three-sections {
+            display: grid;
+            grid-template-rows: 60px 1fr 80px;
+        }
+        
+        &.modal-two-sections {
+            display: grid;
+            grid-template-rows: 60px 1fr;
+        }
+    }
+}

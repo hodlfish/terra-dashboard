@@ -1,0 +1,41 @@
+#mirror-assets-component {
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    overflow: auto;
+
+    #mirror-assets-labels {
+        display: grid;
+        grid-template-columns: 60px 1fr 1fr 1fr 1fr;
+        box-shadow: $shadow-1 0px 2px 4px;
+
+        div {
+            margin: auto;
+            text-align: center;
+            font-weight: bold;
+        }
+    }
+
+    #mirror-assets-list {
+        overflow: auto;
+
+        .mirror-asset-container {
+            display: grid;
+            grid-template-columns: 60px 1fr 1fr 1fr 1fr;
+            height: 60px;
+
+            &:nth-child(odd) {
+                background-color: $bg-1;
+            }
+    
+            img {
+                margin: auto;
+                height: 32px;
+                width: 32px;
+            }
+    
+            div {
+                margin: auto;
+            }
+        }
+    }
+}
