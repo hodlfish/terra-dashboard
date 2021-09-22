@@ -12,14 +12,14 @@ export interface WidgetProps {
 }
 
 export interface PanelEventProps {
-    onRemove: any,
-    onUpdate?: any,
-    onCancelUpdate?: any,
-    onMoveUp?: any,
-    onMoveDown?: any,
-    onHover?: any,
-    onDragStart?: any,
-    onDragEnd?: any
+    onRemove: () => void,
+    onUpdate?: (settings: any) => void,
+    onCancelUpdate?: () => void,
+    onMoveUp?: () => void,
+    onMoveDown?: () => void,
+    onHover?: (location: HoverLocation) => void,
+    onDragStart?: () => void,
+    onDragEnd?: () => void
 }
 
 interface PanelProps {
@@ -31,7 +31,6 @@ interface PanelProps {
     svg?: string,
     img?: string,
     fetch?: any,
-    parse?: any,
     refreshRate?: any,
     events: PanelEventProps,
     settingsComponent?: any,
@@ -92,16 +91,14 @@ function Panel(props: PanelProps) {
         if (settingsOpen) {
             const baseCancel = events.onCancelUpdate;
             events.onCancelUpdate = () => {
-                if (baseCancel) {
+                if (baseCancel)
                     baseCancel();
-                }
                 setSettingsOpen(false);
             }
             const baseUpdate = events.onUpdate;
             events.onUpdate = (settings: any) => {
-                if (baseUpdate) {
+                if (baseUpdate)
                     baseUpdate(settings);
-                }
                 setSettingsOpen(false);
             }
             return (
@@ -118,9 +115,7 @@ function Panel(props: PanelProps) {
                 <div id="widget-error">
                     <p className="bold">Failed to load "{title}"</p>
                     <p>Please try again later.  This can occur during network downtime.</p>
-                    {error.message && 
-                        <p className="error">{error.message}</p>
-                    }
+                    { error.message && <p className="error">{error.message}</p> }
                 </div>
             );
         } else {
@@ -150,15 +145,17 @@ function Panel(props: PanelProps) {
         if (drag) {
             window.addEventListener('mousemove', setMousePosition, false);
             window.addEventListener('mouseup', () => setDrag(false), false);
-            setDragging(true)
-            setHoverLocation(HoverLocation.Center)
-            events.onDragStart();
+            setDragging(true);
+            setHoverLocation(HoverLocation.Center);
+            if (events.onDragStart)
+                events.onDragStart();
         }
         return () => {
             window.removeEventListener("mousemove", setMousePosition, false);
             window.removeEventListener('mouseup', () => setDrag(false), false);
-            setDragging(false)
-            events.onDragEnd();
+            setDragging(false);
+            if (events.onDragEnd)
+                events.onDragEnd();
         };
     }, [dragging, drag, events, setDragging]);
 
@@ -228,27 +225,27 @@ function Panel(props: PanelProps) {
                             </div>
                             :
                             <div className="widget-header-tools">
-                                { fetch !== undefined &&
-                                    <svg className="widget-settings" height="24" width="24" onClick={() => refresh()}>
+                                { fetch &&
+                                    <svg className="widget-settings" height="24" width="24" onClick={refresh}>
                                         <use href="#refresh"/>
                                     </svg>
                                 }
-                                { settingsComponent !== undefined &&
+                                { settingsComponent &&
                                     <svg className="widget-settings" height="24" width="24" onClick={() => setSettingsOpen(!settingsOpen)}>
                                         <use href="#gear"/>
                                     </svg>
                                 }
-                                { events.onMoveUp !== undefined &&
-                                    <svg className="widget-settings" height="24" width="24" onClick={() => events.onMoveUp()}>
+                                { events.onMoveUp &&
+                                    <svg className="widget-settings" height="24" width="24" onClick={events.onMoveUp}>
                                         <use href="#up-arrow"/>
                                     </svg>
                                 }
-                                { events.onMoveDown !== undefined &&
-                                    <svg className="widget-settings" height="24" width="24" onClick={() => events.onMoveDown()}>
+                                { events.onMoveDown &&
+                                    <svg className="widget-settings" height="24" width="24" onClick={events.onMoveDown}>
                                         <use href="#down-arrow"/>
                                     </svg>
                                 }
-                                <svg className="widget-settings" height="24" width="24" onClick={() => events.onRemove()}>
+                                <svg className="widget-settings" height="24" width="24" onClick={events.onRemove}>
                                     <use href="#close"/>
                                 </svg>
                             </div>
