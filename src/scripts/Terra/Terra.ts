@@ -55,7 +55,7 @@ interface ProposalsResponse {
 }
 
 export function getTerraProposals(status: string | undefined = undefined): Promise<Proposal[]> {
-    var query: {[k: string]: any} = {};
+    const query: {[k: string]: any} = {};
     if (status) {
         query.status = status;
     }
@@ -123,7 +123,7 @@ export interface TransactionsResponse {
     txs: TransactionData[]
 }
 
-export function getTransactions(address: string, limit: number = 100, offset: number = 0): Promise<TransactionsResponse> {
+export function getTransactions(address: string, limit = 100, offset = 0): Promise<TransactionsResponse> {
     return axios.get(`${sources.terraFCD.dataUrl}/v1/txs?offset=${offset}&limit=${limit}&account=${address}`).then(response => {
         return response.data as TransactionsResponse;
     });

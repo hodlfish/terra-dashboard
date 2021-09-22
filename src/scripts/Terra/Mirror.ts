@@ -4,7 +4,7 @@ import { sources } from 'scripts/Settings';
 
 const mirUstPoolContract = 'terra1amv303y8kzxuegvurh0gug2xe9wkgj65enq2ux';
 const mirTokenContract = 'terra15gwkyepfc6xgca5t5zefzwy42uts8l2m4g40k6';
-const mirrorGovContract: string = 'terra1wh39swv7nq36pnefnupttm2nr96kz7jjddyt2x';
+const mirrorGovContract = 'terra1wh39swv7nq36pnefnupttm2nr96kz7jjddyt2x';
 
 interface MIRPriceAsset {
     info: any,
@@ -37,7 +37,7 @@ export interface MIRHistoricalPricePoint {
     price: number
 }
 
-export async function getMIRHistoricalPrices(days: number = 30): Promise<MIRHistoricalPricePoint[]> {
+export async function getMIRHistoricalPrices(days = 30): Promise<MIRHistoricalPricePoint[]> {
     const query = gql`
         query asset($token: String!, $from: Float!, $to: Float!, $interval: Float!) {
             asset(token: $token) {
@@ -159,7 +159,7 @@ export const MirrorProposalStatus = {
 }
 
 export function getMirrorProposals(filter: string | undefined = undefined, limit: number | undefined = undefined, start_after: number | undefined = undefined): Promise<any[]> {
-    var query: {[k: string]: any} = {};
+    const query: {[k: string]: any} = {};
     query.polls = {}
     if (filter !== undefined) {
         query.polls.filter = filter;

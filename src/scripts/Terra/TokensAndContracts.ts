@@ -18,9 +18,9 @@ export interface TokenData {
     token: string
 }
 
-export var cw20Tokens: Map<string, TokenData>;
-export var nativeTokens: Map<string, NativeData>;
-export var contracts: Map<string, ContractData>;
+export let cw20Tokens: Map<string, TokenData>;
+export let nativeTokens: Map<string, NativeData>;
+export let contracts: Map<string, ContractData>;
 
 export async function getTokensAndContracts(): Promise<any> {
     try {
@@ -63,7 +63,7 @@ export interface ContractDataAddress {
     protocol: string
 }
 
-export function displayContracts(protocolFilter: string = '', nameFilter: string = ''): ContractDataAddress[] {
+export function displayContracts(protocolFilter: string | undefined = undefined, nameFilter: string | undefined = undefined): ContractDataAddress[] {
     let contractList = Array.from(contracts.entries()).map(([key, value]) => {
         return {...value, contract: key} as ContractDataAddress;
     });

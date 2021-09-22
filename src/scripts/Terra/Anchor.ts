@@ -2,7 +2,7 @@ import axios from 'axios';
 import { gql } from '@apollo/client';
 import { sources } from 'scripts/Settings';
 
-const anchorGovContract: string = 'terra1f32xyep306hhcxxxf7mlyh0ucggc00rm2s9da5';
+const anchorGovContract = 'terra1f32xyep306hhcxxxf7mlyh0ucggc00rm2s9da5';
 
 export async function getLastSyncedHeight() {
     const query = gql`
@@ -84,7 +84,7 @@ export interface ANCHistoricalDataPoint {
     lp_total_supply: string
 }
 
-export async function getANCHistoricalPrices(days: number = 30): Promise<ANCHistoricalDataPoint[]> {
+export async function getANCHistoricalPrices(days = 30): Promise<ANCHistoricalDataPoint[]> {
     const data = (await axios.get(`${sources.anchorAPI.dataUrl}/api/v1/anc/1d`)).data as ANCHistoricalDataPoint[];
     return data.slice(0, days).reverse();
 }
@@ -97,7 +97,7 @@ export const AnchorProposalStatus = {
 }
 
 export function getProposals(filter: string | undefined = undefined, limit: number | undefined = undefined, start_after: number | undefined = undefined): Promise<any[]> {
-    var query: {[k: string]: any} = {};
+    const query: {[k: string]: any} = {};
     query.polls = {}
     if (filter !== undefined) {
         query.polls.filter = filter;

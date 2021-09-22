@@ -63,7 +63,7 @@ function Panel(props: PanelProps) {
     );
 
     const refresh = useCallback(
-        async (showLoading: boolean = true) => {
+        async (showLoading = true) => {
             try {
                 setLoading(showLoading);
                 setError(false);

@@ -74,8 +74,8 @@ export interface RegisteredWidget {
     name: string,
     group: string,
     value: string,
-    component: any,
-    settingsComponent?: any,
+    component: () => JSX.Element,
+    settingsComponent?: () => JSX.Element,
     defaultSettings: any
 }
 

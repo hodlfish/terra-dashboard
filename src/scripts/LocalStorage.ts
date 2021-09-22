@@ -53,7 +53,7 @@ export function getDefaultTemplate() {
 }
 
 export function getDashboards(): Dashboards {
-    let dashboardDataString = localStorage.getItem(DASHBOARDS);
+    const dashboardDataString = localStorage.getItem(DASHBOARDS);
     if (dashboardDataString === null) {
         saveDashboards({dashboards: [], default: undefined});
         const defaultDashboard = getCuratedTemplate();
@@ -95,12 +95,12 @@ function _saveDashboard(dashboard: DashboardData) {
 
 function _saveNewDashboard(dashboard: DashboardData) {
     _saveDashboard(dashboard);
-    let dashboards = getDashboards();
+    const dashboards = getDashboards();
     dashboards.dashboards.push(dashboard.id)
     saveDashboards(dashboards);
 }
 
-export function saveDashboard(dashboard: DashboardData, defaultDashboard: boolean = false): void {
+export function saveDashboard(dashboard: DashboardData, defaultDashboard = false): void {
     const originalDashboardData = getDashboard(dashboard.id);
     if (!originalDashboardData) {
         _saveNewDashboard(dashboard)
@@ -108,7 +108,7 @@ export function saveDashboard(dashboard: DashboardData, defaultDashboard: boolea
         _saveDashboard(dashboard);
     }
     if (defaultDashboard) {
-        let dashboards = getDashboards();
+        const dashboards = getDashboards();
         dashboards.default = dashboard.id;
         saveDashboards(dashboards);
     }

@@ -1,6 +1,6 @@
 interface ModalProps {
-    onClose: any,
-    children: any
+    onClose: () => void,
+    children: React.ReactNode,
     className?: string
 }
 
@@ -10,7 +10,7 @@ function Modal(props: ModalProps) {
         <div id="modal-component">
             <div id="modal-background" onClick={onClose}/>
             <div id="modal-content" className={className}>
-                <svg id="close-modal-button" height="24" width="24" onClick={props.onClose}>
+                <svg id="close-modal-button" height="24" width="24" onClick={onClose}>
                     <use href="#close"/>
                 </svg>
                 {children}

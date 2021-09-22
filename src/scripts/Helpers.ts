@@ -2,21 +2,21 @@ export const monthNames = ["January", "February", "March", "April", "May", "June
   "July", "August", "September", "October", "November", "December"
 ];
 
-export function reduceNumber(value: number, decimals: number = 6) {
+export function reduceNumber(value: number, decimals = 6) {
     if (value >= 1e3) {
-        var units = ["k", "M", "B", "T"];
+        const units = ["k", "M", "B", "T"];
     
-        var order = Math.floor(Math.log(value) / Math.log(1000));
+        const order = Math.floor(Math.log(value) / Math.log(1000));
     
-        var unitname = units[(order - 1)];
-        var num = (value / 1000 ** order).toFixed(decimals);
+        const unitname = units[(order - 1)];
+        const num = (value / 1000 ** order).toFixed(decimals);
     
         return num + unitname;
     }
     return value.toFixed(decimals);
 }
 
-export function formatNumber(value: number, fromMicro: boolean = true, decimals: number = 6, reduce: boolean = false) {
+export function formatNumber(value: number, fromMicro = true, decimals = 6, reduce = false) {
     if (fromMicro) {
         value = value / 1000000;
     }
@@ -65,7 +65,7 @@ export function formatTimestamp(timestamp: any, format: TimestampFormats = Times
 
 export function generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c === 'x' ? r : ((r & 0x3) | 0x8);
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : ((r & 0x3) | 0x8);
         return v.toString(16);
     });
 }

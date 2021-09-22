@@ -97,7 +97,7 @@ function SelectDashboardModal(props: any) {
         const files = e.target.files;
         if (files.length > 0) {
             const f = files[0];
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = (data => {
                 try {
                     const uploadedDashboard = JSON.parse(data.target?.result as string) as DashboardData;

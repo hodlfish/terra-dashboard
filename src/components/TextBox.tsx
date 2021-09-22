@@ -41,7 +41,7 @@ function TextBox(props: TextBoxProps) {
                             <use href="#save"/>
                         </svg>
                     </button>
-                    <button type="button" onClick={e => setEditing(false)}>
+                    <button type="button" onClick={() => setEditing(false)}>
                         <svg width="24" height="24" className="button-icon">
                             <use href="#close"/>
                         </svg>

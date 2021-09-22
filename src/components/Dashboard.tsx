@@ -47,7 +47,7 @@ function Dashboard() {
         setSelectedDashboard({...selectedDashboard});
     }
 
-    const onMoveWidget = (widget: any, moveUp: boolean = true) => {
+    const onMoveWidget = (widget: any, moveUp = true) => {
         const oldIndex = selectedDashboard.dashboard.findIndex(w => w === widget);
         if (!(moveUp && oldIndex === 0) && !(!moveUp && oldIndex === selectedDashboard.dashboard.length - 1)) {
             const newIndex = oldIndex + (moveUp ? -1 : 1);

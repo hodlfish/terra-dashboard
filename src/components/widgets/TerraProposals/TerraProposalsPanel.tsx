@@ -10,7 +10,7 @@ function TerraProposals(props: WidgetProps) {
     const [proposals, setProposals] = useState<Proposal[]>([]);
 
     const fetch = useCallback(async () => {
-        let proposals = await getTerraProposals(filter);
+        const proposals = await getTerraProposals(filter);
         return () => {
             setProposals(proposals);
         }
