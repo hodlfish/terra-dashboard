@@ -1,5 +1,9 @@
 # Terra Dashboard
-Terra Dashboard provides a customizable interface allowing users to build their own crypto dashboards so they can see the data they need.
+Terra Dashboard is a customizable crypto interface which allows users to build their own crypto dashboards so they can see the data they want.
+
+The orignal version of this site was released by HODLFish Labs, but the repository is now open source.  HODLFish Labs will continue to operate a build of the main branch of this repository at https://terradashboard.com.
+
+If you are intersted in contributing please follow the guide below.
 
 # Important Links
 Main Deployment - https://terradashboard.com
@@ -9,8 +13,8 @@ Twitter - https://twitter.com/TerraDashboard
 Telegram - https://t.me/terradashboard
 
 # Development Guide
-## Installation
-Node and NPM are required to build and run this project.  The following versions are currently being used...
+## Install
+Node and NPM are required to build and run this project.  The following versions are currently being used indevelopment...
 
 `Node: v14.15.4, NPM: 6.14.10`
 
@@ -24,4 +28,8 @@ Run local development server...
 
 Build site for distribution...
 
-`npm build`
+`npm run build --aot --prod`
+
+
+## Contribute
+Notes on contributing to the repo can be found in CONTRIBUTE.md.

@@ -1,3 +1,13 @@
+# Welcome!
+Thank you for contributing to Terra Dashboard!  Below are some instructions to help you get started in the repo.
+
+Note these instructions are not complete and are subject to change.  Feel free to discuss them in Telegram if there are any questions or concerns.
+
+# Branching Strategy
+- `main`: Current stable build of the site hosted on https://terradashboard.com.
+- `dev`: The batch of changes merged in from feature/bugfix/update branchs, which will be tested and eventually merged to `main`.
+- `<feature or bug fix name>`:  This is where contributions and updates will start.  
+
 # Adding Widgets
 The goal of this project is to make new data sources and widgets easy to add and maintain.  Any new widgets should be added with this goal in mind.  Below is a guide on how to add a new widget:
 
@@ -16,4 +26,4 @@ The goal of this project is to make new data sources and widgets easy to add and
 # Beyond Adding Widgets
 If your goal is to make the project cleaner, more efficient, etc., please do so!
 
-The current format of the widgets and the project is not gospel and should be criticized and updated.  Just ensure that any updates improve or retain maintainability.
+The current format of the widgets and the project is not final and should be criticized and updated.  Just ensure that any updates improve or retain maintainability and ease os use.
