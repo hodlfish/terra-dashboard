@@ -11,7 +11,7 @@ function WalletValidatorsPanel(props: WidgetProps) {
     const [validators, setValidators] = useState<ValidatorDelegation[]>([]);
     const [graphData, setGraphData] = useState<any>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         let validators = await getWalletStakingBalances(addr);
         return () => {
             validators = validators.sort((a, b) => (parseInt(b.delegation.shares) - parseInt(a.delegation.shares)));
@@ -60,7 +60,7 @@ function WalletValidatorsPanel(props: WidgetProps) {
             svg={'terra'}
             size={'small'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div id="wallet-validators-component">
                     {graphData &&

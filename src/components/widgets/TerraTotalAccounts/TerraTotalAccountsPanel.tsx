@@ -11,7 +11,7 @@ function TerraTotalAccountsPanel(props: WidgetProps) {
     const [total, setTotal] = useState<number>();
     const [graphData, setGraphData] = useState<any>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const data = await getTerraAccounts();
         return () => {
             let dataSet = [];
@@ -55,7 +55,7 @@ function TerraTotalAccountsPanel(props: WidgetProps) {
             svg={'terra'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="labeled-graph-widget">
                     <div className="graph-label">Total: {total}</div>

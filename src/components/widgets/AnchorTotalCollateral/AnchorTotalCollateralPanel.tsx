@@ -10,7 +10,7 @@ function AnchorTotalCollateralPanel(props: WidgetProps) {
     const {name, timeSpan} = Object.assign({...defaults}, props.settings as Settings);
     const [graphData, setGraphData] = useState<any>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         let data = await getHistoricalCollaterals();
         return () => {
             data = data.slice(0, Math.min(data.length, timeSpan)).reverse();
@@ -36,7 +36,7 @@ function AnchorTotalCollateralPanel(props: WidgetProps) {
             svg={'anchor'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="labeled-graph-widget">
                     {graphData &&

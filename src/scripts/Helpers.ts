@@ -45,7 +45,7 @@ export function pad(num: number, size: number): string {
     return s;
 }
 
-// Formats denote required granulatiry of timestamp
+// Formats denote required granularity of timestamp
 export enum TimestampFormats {
     hoursMinutes, hours, monthDay
 }
@@ -53,9 +53,9 @@ export enum TimestampFormats {
 export function formatTimestamp(timestamp: any, format: TimestampFormats = TimestampFormats.hours) {
     const d =  new Date(timestamp);
     if (format === TimestampFormats.hoursMinutes) {
-        return `${d.getHours() % 12 + 1}: ${pad(d.getMinutes(), 2)} ${d.getHours() % 23 >= 11 ? 'PM' : 'AM'}`;
+        return `${(d.getHours() + 11) % 12 + 1}: ${pad(d.getMinutes(), 2)} ${d.getHours() >= 12 ? 'PM' : 'AM'}`;
     } else if (format === TimestampFormats.hours) {
-        return `${d.getHours() % 12 + 1} ${d.getHours() % 23 >= 11 ? 'PM' : 'AM'}`;
+        return `${(d.getHours() + 11) % 12 + 1} ${d.getHours() >= 12 ? 'PM' : 'AM'}`;
     } else if ( format === TimestampFormats.monthDay) {
         return `${monthNames[d.getMonth()].slice(0, 3)} ${d.getDate()}`
     } else {

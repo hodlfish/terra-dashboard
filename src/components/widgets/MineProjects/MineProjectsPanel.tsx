@@ -13,7 +13,7 @@ function MineProjectsPanel(props: WidgetProps) {
     const {name} = Object.assign({...defaults}, props.settings as Settings);
     const [projects, setProjects] = useState<PylonProject[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const projects = await getPylonProjects();
         return () => {
             setProjects(projects);
@@ -30,7 +30,7 @@ function MineProjectsPanel(props: WidgetProps) {
             svg={'pylon'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div id="pylon-projects">
                     {projects.map(p => 

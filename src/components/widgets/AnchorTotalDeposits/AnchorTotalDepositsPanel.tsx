@@ -16,7 +16,7 @@ function AnchorTotalDepositsPanel(props: WidgetProps) {
     const {name, timeSpan} = Object.assign({...defaults}, props.settings as Settings);
     const [graphData, setGraphData] = useState<any>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const deposits = await getHistoricalDeposits();
         const borrows = await getHistoricalBorrows();
         return () => {
@@ -65,7 +65,7 @@ function AnchorTotalDepositsPanel(props: WidgetProps) {
             svg={'anchor'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="labeled-graph-widget">
                     {graphData &&

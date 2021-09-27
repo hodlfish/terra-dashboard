@@ -30,7 +30,7 @@ interface PanelProps {
     error?: any
     svg?: string,
     img?: string,
-    fetch?: any,
+    refresh?: any,
     refreshRate?: any,
     events: PanelEventProps,
     settingsComponent?: any,
@@ -45,7 +45,7 @@ function Panel(props: PanelProps) {
         svg = undefined,
         img = undefined,
         events = props.events,
-        fetch = undefined,
+        refresh = undefined,
         refreshRate = undefined,
         settingsComponent = undefined,
         settings = undefined,
@@ -57,20 +57,20 @@ function Panel(props: PanelProps) {
     const [error, setError] = useState<any>();
     const isMounted = useIsMounted();
     useInterval(
-        () => refresh(false),
+        () => onRefresh(false),
         refreshRate ? Math.max(MIN_REFRESH_RATE, refreshRate) * 1000 : refreshRate
     );
 
-    const refresh = useCallback(
+    const onRefresh = useCallback(
         async (showLoading = true) => {
             try {
                 setLoading(showLoading);
                 setError(false);
-                if (!fetch) {
+                if (!refresh) {
                     setLoading(false);
                     return;
                 }
-                const setData = await fetch();
+                const setData = await refresh();
                 if (isMounted()) {
                     setData();
                     setLoading(false);
@@ -82,10 +82,10 @@ function Panel(props: PanelProps) {
                     setLoading(false);
                 }
             }
-        }, [fetch, isMounted]
+        }, [refresh, isMounted]
     );
     
-    useEffect(() => {refresh()}, [refresh]);
+    useEffect(() => {onRefresh()}, [refresh]);
 
     const renderPanelContent = () => {
         if (settingsOpen) {
@@ -225,8 +225,8 @@ function Panel(props: PanelProps) {
                             </div>
                             :
                             <div className="widget-header-tools">
-                                { fetch &&
-                                    <svg className="widget-settings" height="24" width="24" onClick={refresh}>
+                                { refresh &&
+                                    <svg className="widget-settings" height="24" width="24" onClick={onRefresh}>
                                         <use href="#refresh"/>
                                     </svg>
                                 }

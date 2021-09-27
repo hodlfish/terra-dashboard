@@ -10,7 +10,7 @@ function WalletPanel(props: WidgetProps) {
     const [walletNativeTokens, setWalletNativeTokens] = useState<WalletNativeToken[]>([]);
     const [walletCW20Tokens, setWalletCW20Tokens] = useState<WalletContractToken[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const tokens = [] as string[];
         cw20Tokens.forEach(t => tokens.push(t.token));
         const data = await getWalletContents(addr, tokens);
@@ -64,7 +64,7 @@ function WalletPanel(props: WidgetProps) {
             title={name}
             svg={'wallet'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div id="wallet-panel-component">
                     {filteredNativeTokens().map(token => 

@@ -10,7 +10,7 @@ function TerraTaxRewardsPanel(props: WidgetProps) {
     const {name, format, timeSpan} = Object.assign({...defaults}, props.settings as Settings);
     const [graphData, setGraphData] = useState<any>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const exchangeRates = await getExchangeRates();
         const data = await getTerraBlockRewards();
         return () => {
@@ -50,7 +50,7 @@ function TerraTaxRewardsPanel(props: WidgetProps) {
             svg={'terra'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="labeled-graph-widget">
                     <div className="graph-label">{format} - {timeSpan} days</div>

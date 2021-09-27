@@ -11,7 +11,7 @@ function MirrorPricePanel(props: WidgetProps) {
     const [graphData, setGraphData] = useState<any>();
     const [currentPrice, setCurrentPrice] = useState<string>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const currentPrice = await getMIRPrice();
         const historicalData = await getMIRHistoricalPrices();
         return () => {
@@ -41,7 +41,7 @@ function MirrorPricePanel(props: WidgetProps) {
             svg={'mirror'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="labeled-graph-widget">
                     <div className="graph-label">$MIR: {currentPrice} UST</div>

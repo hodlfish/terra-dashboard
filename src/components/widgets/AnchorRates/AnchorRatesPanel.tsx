@@ -16,7 +16,7 @@ function AnchorRatesPanel(props: WidgetProps) {
     const {name, decimals} = Object.assign({...defaults}, props.settings as Settings);
     const [rateData, setRateData] = useState<AnchorRatesData>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const anchorAPYs = await getAPYs();
         const anchorRates = await getMarketStableCoin();
         const borrowMarketState = await getBorrowMarketState();
@@ -39,7 +39,7 @@ function AnchorRatesPanel(props: WidgetProps) {
             svg={'anchor'}
             size={'small'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="small-data-list-widget">
                     <div className="data-list space-evenly">

@@ -11,7 +11,7 @@ function TerraTransactionVolumePanel(props: WidgetProps) {
     const {name, denom, format, timeSpan} = Object.assign({...defaults}, props.settings as Settings);
     const [graphData, setGraphData] = useState<any>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const data = await getTerraTransactionVolume();
         return () => {
             const dataFormat = (format === GraphFormats.periodic ? data.periodic : data.cumulative);
@@ -48,7 +48,7 @@ function TerraTransactionVolumePanel(props: WidgetProps) {
             svg={'terra'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="labeled-graph-widget">
                     <div className="graph-label">{nativeTokens.get(denom)?.symbol} - {format}</div>

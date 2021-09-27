@@ -24,7 +24,7 @@ function NativeTokenSupplyPanel(props: WidgetProps) {
     const [selectedTokenSupply, setSelectedTokenSupply] = useState<NativeTokenDisplayData>();
     const [tokenSupplies, setTokenSupplies] = useState<NativeTokenDisplayData[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const data = await getNativeTokenSupplies();
         return () => {
             let tokenSupplies = data.map(d => {
@@ -54,7 +54,7 @@ function NativeTokenSupplyPanel(props: WidgetProps) {
             size={'small'}
             svg={'terra'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="small-data-list-widget">
                     <div className="data-list">

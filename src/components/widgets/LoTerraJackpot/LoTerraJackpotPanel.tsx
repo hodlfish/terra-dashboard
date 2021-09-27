@@ -18,7 +18,7 @@ function LoTerraJackpotPanel(props: WidgetProps) {
     const {name} = Object.assign({...defaults}, props.settings as Settings);
     const [lotteryData, setLotteryData] = useState<LotteryData>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const config = await getConfig();
         const tickets = await getTickets(config.lottery_counter);
         const players = await getPlayers(config.lottery_counter);
@@ -40,7 +40,7 @@ function LoTerraJackpotPanel(props: WidgetProps) {
             img={sources.loterraAPI.icon}
             size={'small'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="small-data-list-widget">
                     <div className="data-list space-evenly">

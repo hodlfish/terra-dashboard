@@ -10,7 +10,7 @@ function MirrorProposalsPanel(props: WidgetProps) {
     const {name, filter, limit} = Object.assign({...defaults}, props.settings as Settings);
     const [proposals, setProposals] = useState<any[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const proposals = await getMirrorProposals(filter, limit);
         return () => {
             setProposals(proposals);
@@ -61,7 +61,7 @@ function MirrorProposalsPanel(props: WidgetProps) {
             size={'medium'}
             svg={'mirror'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="proposal-widget">
                     {proposals.length > 0 ?

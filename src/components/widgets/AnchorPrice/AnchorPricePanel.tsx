@@ -12,7 +12,7 @@ function AnchorPricePanel(props: WidgetProps) {
     const [graphData, setGraphData] = useState<any>();
     const [currentPrice, setCurrentPrice] = useState<string>();
 
-    const fetch = useCallback(async() => {
+    const refresh = useCallback(async() => {
         const currentPrice = await getANCPrice();
         const historicalData = await getANCHistoricalPrices();
         return () => {
@@ -39,7 +39,7 @@ function AnchorPricePanel(props: WidgetProps) {
             svg={'anchor'}
             size={'medium'}
             events={events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="labeled-graph-widget">
                     <div className="graph-label">$ANC: {currentPrice} UST</div>

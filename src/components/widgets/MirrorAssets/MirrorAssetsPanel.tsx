@@ -8,7 +8,7 @@ function MirrorAssetsPanel(props: WidgetProps) {
     const {name, sortBy} = Object.assign({...defaults}, props.settings as Settings);
     const [assets, setAssets] = useState<MirrorAsset[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const mirrorAssets = await getMirrorAssets();
         return () => {
             setAssets(mirrorAssets);
@@ -58,7 +58,7 @@ function MirrorAssetsPanel(props: WidgetProps) {
             svg={'mirror'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div id="mirror-assets-component">
                     <div id="mirror-assets-labels">

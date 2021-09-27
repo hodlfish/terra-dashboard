@@ -9,7 +9,7 @@ function AnchorProposalsPanel(props: WidgetProps) {
     const {name, filter, limit} = Object.assign({...defaults}, props.settings as Settings);
     const [proposals, setProposals] = useState<any[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const proposals = await getProposals(filter, limit);
         return () => {
             setProposals(proposals);
@@ -59,7 +59,7 @@ function AnchorProposalsPanel(props: WidgetProps) {
             size={'medium'}
             svg={'anchor'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="proposal-widget">
                     {proposals.length > 0 ?

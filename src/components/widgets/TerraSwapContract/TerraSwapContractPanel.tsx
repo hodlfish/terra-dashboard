@@ -10,7 +10,7 @@ function TerraSwapContractPanel(props: WidgetProps) {
     const {name, contractAddr, flipRatio, refreshRate, decimals} = Object.assign({...defaults}, props.settings as Settings);
     const [contractHoldings, setContractHoldings] = useState<TerraSwapContractHoldings>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const data = await getTerraSwapContract(contractAddr);
         return () => {
             setContractHoldings(data);
@@ -88,7 +88,7 @@ function TerraSwapContractPanel(props: WidgetProps) {
             title={getTitle()}
             img={getIcon()}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             refreshRate={refreshRate}
             content={
                 <div className="small-data-list-widget">

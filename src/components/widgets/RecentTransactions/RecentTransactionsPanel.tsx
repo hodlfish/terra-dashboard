@@ -7,7 +7,7 @@ function RecentTransactionsPanel(props: WidgetProps) {
     const {name, addr} = Object.assign({...defaults}, props.settings as Settings);
     const [transactions, setTransactions] = useState<TransactionData[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const transactions = await getTransactions(addr);
         return () => {
             setTransactions(transactions.txs);
@@ -32,7 +32,7 @@ function RecentTransactionsPanel(props: WidgetProps) {
             svg={'terra'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div id="recent-transactions-component">
                     {transactions.map(transaction => 

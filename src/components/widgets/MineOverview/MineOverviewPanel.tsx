@@ -16,7 +16,7 @@ function MineOverviewPanel(props: WidgetProps) {
     const {name} = Object.assign({...defaults}, props.settings as Settings);
     const [displayData, setDisplayData] = useState<MineData>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const mineOverview = await getMineOverview();
         const mineGovernance = await getMineGovernanceOverview();
         const mineLiquidity = await getMineLiquidityOverview()
@@ -37,7 +37,7 @@ function MineOverviewPanel(props: WidgetProps) {
             svg={'pylon'}
             size={'small'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="small-data-list-widget">
                     <div className="data-list">

@@ -11,7 +11,7 @@ function LunaPricePanel(props: WidgetProps) {
     const [lunaPrice, setLunaPrice] = useState<string>();
     const [graphData, setGraphData] = useState<any>();
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const data = await getLunaPrice(interval);
         return () => {
             let format = TimestampFormats.hoursMinutes;
@@ -43,7 +43,7 @@ function LunaPricePanel(props: WidgetProps) {
             svg={'terra'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             refreshRate={refreshRate}
             content={
                 <div className="labeled-graph-widget">

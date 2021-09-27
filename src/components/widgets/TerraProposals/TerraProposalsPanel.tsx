@@ -9,7 +9,7 @@ function TerraProposals(props: WidgetProps) {
     const {name, filter} = Object.assign({...defaults}, props.settings as Settings);
     const [proposals, setProposals] = useState<Proposal[]>([]);
 
-    const fetch = useCallback(async () => {
+    const refresh = useCallback(async () => {
         const proposals = await getTerraProposals(filter);
         return () => {
             setProposals(proposals);
@@ -84,7 +84,7 @@ function TerraProposals(props: WidgetProps) {
             svg={'terra'}
             size={'medium'}
             events={props.events}
-            fetch={fetch}
+            refresh={refresh}
             content={
                 <div className="proposal-widget">
                     {proposals.length > 0 ?
