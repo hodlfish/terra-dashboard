@@ -367,10 +367,14 @@ export function getWalletValidators(address: string): Promise<Validator[]> {
     });
 }
 
-export interface WalletDelegation {
+export interface ValidatorDelegation {
     delegator_address: string,
     validator_address: string,
-    shares: string,
+    shares: string;
+}
+
+export interface WalletDelegation {
+    delegation: ValidatorDelegation,
     balance: any
 }
 
@@ -391,7 +395,7 @@ export async function getWalletStakingBalances(address: string): Promise<Validat
     return validators.map(v => {
         return {
             validator: v,
-            delegation: delegations.find(d => d.validator_address === v.operator_address)
+            delegation: delegations.find(d => d.delegation.validator_address === v.operator_address)
         } as ValidatorDelegation;
     })
 }

@@ -13,7 +13,7 @@ function AnchorPricePanel(props: WidgetProps) {
     const [currentPrice, setCurrentPrice] = useState<string>();
 
     const refresh = useCallback(async() => {
-        const currentPrice = await getANCPrice();
+        const ancPrice = await getANCPrice();
         const historicalData = await getANCHistoricalPrices();
         return () => {
             const newData = {
@@ -29,7 +29,7 @@ function AnchorPricePanel(props: WidgetProps) {
                 ]
             }
             setGraphData(newData);
-            setCurrentPrice(currentPrice.toFixed(decimals));
+            setCurrentPrice(parseFloat(ancPrice.anc_price).toFixed(decimals));
         }
     }, [decimals]);
 

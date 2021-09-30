@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import Panel, { WidgetProps } from "components/panels/Panel";
-import { getAPYs, getMarketStableCoin, getBorrowMarketState, getBorrowMarket } from "scripts/Terra/Anchor";
+import { getBorrowMarketState, getBorrowMarket, getDistributionAPY, getUstLPRewards, getGovernanceRewards, getDepositAPY } from "scripts/Terra/Anchor";
 import { defaults, Settings, SettingsPanel } from './AnchorRatesSettings';
 
 interface AnchorRatesData {
@@ -17,18 +17,20 @@ function AnchorRatesPanel(props: WidgetProps) {
     const [rateData, setRateData] = useState<AnchorRatesData>();
 
     const refresh = useCallback(async () => {
-        const anchorAPYs = await getAPYs();
-        const anchorRates = await getMarketStableCoin();
+        const distributionAPY = parseFloat((await getDistributionAPY()).distribution_apy);
+        const lpRewards = parseFloat((await getUstLPRewards()).apy);
+        const govRewards = parseFloat((await getGovernanceRewards()).current_apy);
+        const depositAPY = (await await getDepositAPY())[0].deposit_apy;
         const borrowMarketState = await getBorrowMarketState();
         const borrowAPR = await getBorrowMarket(borrowMarketState.marketBalance, borrowMarketState.totalLiabilities, borrowMarketState.totalReserves);
         return () => {
             setRateData({
-                distributionAPY: (anchorAPYs.distributionAPY * 100).toFixed(decimals),
-                governanceAPY: (anchorAPYs.governanceAPY * 100).toFixed(decimals),
-                lpRewards: (anchorAPYs.lpRewards * 100).toFixed(decimals),
+                distributionAPY: (distributionAPY * 100).toFixed(decimals),
+                governanceAPY: (govRewards * 100).toFixed(decimals),
+                lpRewards: (lpRewards * 100).toFixed(decimals),
                 borrowAPR: (borrowAPR * 100).toFixed(decimals),
-                depositAPY: (anchorRates.depositAPY * 100).toFixed(decimals),
-                netBorrowAPR: ((anchorAPYs.distributionAPY - borrowAPR) * 100).toFixed(decimals)
+                depositAPY: (depositAPY * 100).toFixed(decimals),
+                netBorrowAPR: ((distributionAPY - borrowAPR) * 100).toFixed(decimals)
             });
         }
     }, [decimals]);
