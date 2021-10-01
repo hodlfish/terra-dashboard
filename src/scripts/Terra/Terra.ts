@@ -399,14 +399,3 @@ export async function getWalletStakingBalances(address: string): Promise<Validat
         } as ValidatorDelegation;
     })
 }
-
-export interface DenomSupply {
-    denom: string,
-    amount: string
-}
-
-export function getNativeTokenSupplies(): Promise<DenomSupply[]> {
-    return axios.get(`${sources.terraFCD.dataUrl}/supply/total`).then(response => {
-        return response.data.result as DenomSupply[];
-    });
-}
