@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { getNativeTokenSupplies } from 'scripts/Terra/Terra';
+import { getTerraStationDashboard } from 'scripts/Terra/Terra';
 import { nativeTokens, NativeData } from "scripts/Terra/TokensAndContracts";
 import Panel, { WidgetProps } from "components/panels/Panel";
 import {Settings, defaults, SettingsPanel} from "./NativeTokenSupplySettings";
@@ -25,14 +25,14 @@ function NativeTokenSupplyPanel(props: WidgetProps) {
     const [tokenSupplies, setTokenSupplies] = useState<NativeTokenDisplayData[]>([]);
 
     const refresh = useCallback(async () => {
-        const data = await getNativeTokenSupplies();
+        const data = await getTerraStationDashboard();
         return () => {
-            let tokenSupplies = data.map(d => {
+            let tokenSupplies = (Object.entries(data.issuances) as [string, string][]).map(([denom, amount]) => {
                 return {
-                    denom: d.denom,
-                    token: nativeTokens.get(d.denom),
-                    supplyNumber: parseInt(d.amount),
-                    supplyFormatted: formatNumber(parseInt(d.amount), true, decimals, true)
+                    denom: denom,
+                    token: nativeTokens.get(denom),
+                    supplyNumber: parseInt(amount),
+                    supplyFormatted: formatNumber(parseInt(amount), true, decimals, true)
                 } as NativeTokenDisplayData;
             }).filter(
                 d => d.token !== undefined

@@ -14,7 +14,7 @@ function WalletValidatorsPanel(props: WidgetProps) {
     const refresh = useCallback(async () => {
         let validators = await getWalletStakingBalances(addr);
         return () => {
-            validators = validators.sort((a, b) => (parseInt(b.delegation.shares) - parseInt(a.delegation.shares)));
+            validators = validators.sort((a, b) => (parseInt(b.delegation.delegation.shares) - parseInt(a.delegation.delegation.shares)));
             generateGraph(validators);
             setValidators(validators)
         }
@@ -33,7 +33,7 @@ function WalletValidatorsPanel(props: WidgetProps) {
             datasets: [
                 {
                     label: 'Validators',
-                    data: validators.map(v => parseFloat(v.delegation.shares) / 1000000),
+                    data: validators.map(v => parseFloat(v.delegation.delegation.shares) / 1000000),
                     backgroundColor: backgroundColor,
                     borderWidth: 0
                 }
@@ -43,7 +43,7 @@ function WalletValidatorsPanel(props: WidgetProps) {
     }
 
     const renderValidator = (validator: ValidatorDelegation) => {
-        const shares = formatNumber(parseInt(validator.delegation.shares), true, decimals);
+        const shares = formatNumber(parseInt(validator.delegation.delegation.shares), true, decimals);
         const commission = formatNumber(parseFloat(validator.validator.commission.commission_rates.rate), false, 2);
         return (
             <div key={validator.validator.operator_address} className="validator-container">

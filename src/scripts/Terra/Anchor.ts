@@ -18,26 +18,6 @@ export async function getLastSyncedHeight() {
     return lastSyncedHeightData.data.data.LastSyncedHeight;
 }
 
-export async function getANCPrice() {
-    const query = gql`
-        {
-            ancPrice: WasmContractsContractAddressStore(
-                ContractAddress: "terra1gm5p3ner9x9xpwugn9sp6gvhd0lwrtkyrecdn3"
-                QueryMsg: "{\\"pool\\":{}}"
-            ) {
-                Result
-            }
-        }
-    `;
-    const body = {
-        variables: {},
-        query: (query.loc && query.loc.source.body)
-    }
-    const anchorPriceData = await axios.post(`${sources.anchorMantle.dataUrl}/?anc--price`, body);
-    const assets = JSON.parse(anchorPriceData.data.data.ancPrice.Result).assets;
-    return parseFloat(assets[1].amount) / parseFloat(assets[0].amount);
-}
-
 export async function getAUSTPrice(height: number) {
     const query = gql`
         {
@@ -82,6 +62,12 @@ export interface ANCHistoricalDataPoint {
     distributor_anc_holding: string,
     community_anc_holding: string,
     lp_total_supply: string
+}
+
+export function getANCPrice(): Promise<ANCHistoricalDataPoint> {
+    return axios.get(`${sources.anchorAPI.dataUrl}/api/v1/anc`).then(response => {
+        return response.data as ANCHistoricalDataPoint;
+    });
 }
 
 export async function getANCHistoricalPrices(days = 30): Promise<ANCHistoricalDataPoint[]> {
@@ -166,83 +152,7 @@ export function getHistoricalCollaterals(): Promise<AnchorCollateralDataPoint[]>
     });
 }
 
-interface AnchorAPYs {
-    distributionAPY: number,
-    governanceAPY: number,
-    lpRewards: number
-}
-
-export async function getAPYs(): Promise<AnchorAPYs> {
-    const query = gql`
-        query {
-            borrowerDistributionAPYs: AnchorBorrowerDistributionAPYs(
-                Order: DESC
-                Limit: 1
-            ) {
-                Height
-                Timestamp
-                DistributionAPY
-            }
-            govRewards: AnchorGovRewardRecords(Order: DESC, Limit: 1) {
-                CurrentAPY
-                Timestamp
-                Height
-            }
-            lpRewards: AnchorLPRewards(Order: DESC, Limit: 1) {
-                Height
-                Timestamp
-                APY
-            }
-        }
-    `;
-    const body = {
-        query: (query.loc && query.loc.source.body),
-        variables: {}
-    }
-    const response = (await axios.post(`${sources.anchorMantle.dataUrl}/?borrow--apy`, body)).data.data;
-    return {
-        distributionAPY: response.borrowerDistributionAPYs[0].DistributionAPY,
-        governanceAPY: response.govRewards[0].CurrentAPY,
-        lpRewards: response.lpRewards[0].APY
-    };
-}
-
-interface AnchorRates {
-    borrowAPR: number,
-    depositAPY: number
-}
-
 const blocksPerYear = 4656810;
-
-export async function getMarketStableCoin(): Promise<AnchorRates> {
-    const query = gql`
-        {
-            borrowRate: WasmContractsContractAddressStore(
-                ContractAddress: "terra1kq8zzq5hufas9t0kjsjc62t2kucfnx8txf547n"
-                QueryMsg: "{\\"borrow_rate\\":{\\"market_balance\\":\\"637978000190978\\",\\"total_reserves\\":\\"0.127014529524242008\\",\\"total_liabilities\\":\\"841525269253983.627811243232436343\\"}}"
-            ) {
-                Result
-            }
-            epochState: WasmContractsContractAddressStore(
-                ContractAddress: "terra1tmnqgvg567ypvsvk6rwsga3srp7e3lg6u0elp8"
-                QueryMsg: "{\\"epoch_state\\":{}}"
-            ) {
-                Result
-            }
-        }
-    `;
-    const body = {
-        query: (query.loc && query.loc.source.body),
-        variables: {}
-    }
-    const {borrowRate, epochState} = (await axios.post(`${sources.anchorMantle.dataUrl}/?market--stable-coin`, body)).data.data;
-    const bRate = parseFloat(JSON.parse(borrowRate.Result).rate);
-    const dRate = parseFloat(JSON.parse(epochState.Result).deposit_rate);
-    return {
-        borrowAPR: bRate * blocksPerYear,
-        depositAPY: dRate * blocksPerYear
-    }
-}
 
 const marketContract = 'terra1sepfj7s0aeg5967uxnfk4thzlerrsktkpelm5s';
 
@@ -273,7 +183,7 @@ export async function getBorrowMarketState(market: string = marketContract): Pro
         query: (query.loc && query.loc.source.body),
         variables: {marketContract: market}
     }
-    const {marketBalances, marketState} = (await axios.post(`${sources.anchorMantle.dataUrl}/?borrow--market`, body)).data.data;
+    const {marketBalances, marketState} = (await axios.post(`${sources.terraMantle.dataUrl}/?borrow--market-state`, body)).data.data;
     const marketBalancesResult = marketBalances.Result;
     const marketStateResult = JSON.parse(marketState.Result);
     return {
@@ -310,7 +220,61 @@ export async function getBorrowMarket(marketBalance: number, totalLiabilities: n
         query: (query.loc && query.loc.source.body),
         variables: {}
     }
-    const {borrowRate} = (await axios.post(`${sources.anchorMantle.dataUrl}/?borrow--market`, body)).data.data;
+    const {borrowRate} = (await axios.post(`${sources.terraMantle.dataUrl}/?borrow--market`, body)).data.data;
     const bRate = parseFloat(JSON.parse(borrowRate.Result).rate) * blocksPerYear;
     return bRate;
+}
+
+export interface AnchorGovernanceRewards {
+    height: number,
+    timestamp: number,
+    gov_share_index: string,
+    current_apy: string
+}
+
+export function getGovernanceRewards(): Promise<AnchorGovernanceRewards> {
+    return axios.get(`${sources.anchorAPI.dataUrl}/api/v2/gov-reward`).then(response => {
+        return response.data as AnchorGovernanceRewards;
+    });
+}
+
+export interface AnchorUstLPRewards {
+    height: number,
+    timestamp: number,
+    apy: string
+}
+
+export function getUstLPRewards(): Promise<AnchorUstLPRewards> {
+    return axios.get(`${sources.anchorAPI.dataUrl}/api/v2/ust-lp-reward`).then(response => {
+        return response.data as AnchorUstLPRewards;
+    });
+}
+
+export interface AnchorDistributionAPYResponse {
+    height: number,
+    timestamp: number,
+    anc_price: string,
+    anc_emission_rate: string,
+    total_liabilities: string,
+    distribution_apy: string
+}
+
+export function getDistributionAPY(): Promise<AnchorDistributionAPYResponse> {
+    return axios.get(`${sources.anchorAPI.dataUrl}/api/v2/distribution-apy`).then(response => {
+        return response.data as AnchorDistributionAPYResponse;
+    });
+}
+
+export interface AnchorDepositAPYDataPoint {
+    timestamp: number,
+    height: number,
+    deposit_rate: string,
+    deposit_apy: number
+}
+
+export function getDepositAPY(): Promise<AnchorDepositAPYDataPoint[]> {
+    return axios.get(`${sources.anchorAPI.dataUrl}/api/v2/deposit-rate`).then(response => {
+        (response.data as AnchorDepositAPYDataPoint[]).forEach(apy => apy.deposit_apy = parseFloat(apy.deposit_rate) * blocksPerYear);
+        return response.data as AnchorDepositAPYDataPoint[];
+    });
 }
