@@ -51,5 +51,11 @@ export const sources = {
         name: 'LoTerra API',
         icon: 'https://loterra.io/logo.png',
         infoUrl: 'https://docs.loterra.io/'
+    },
+    spectrumAPI: {
+        name: 'Spectrum Finance',
+        icon: ' https://terra.spec.finance/assets/SPEC.png',
+        infoUrl: 'https://terra.spec.finance/vaults',
+        dataUrl: 'https://specapi.azurefd.net/'
     }
 }

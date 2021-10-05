@@ -70,6 +70,9 @@ import * as MineProjectsSettings from './MineProjects/MineProjectsSettings';
 import LoTerraJackpotPanel from "./LoTerraJackpot/LoTerraJackpotPanel";
 import * as LoTerraJackpotSettings from './LoTerraJackpot/LoTerraJackpotSettings';
 
+import SpectrumVaultsPanel from "./SpectrumVaults/SpectrumVaultsPanel";
+import * as SpectrumVaultsSettings from "./SpectrumVaults/SpectrumVaultsSettings";
+
 export interface RegisteredWidget {
     name: string,
     group: string,
@@ -86,6 +89,7 @@ export const groups = {
     anchor: 'Anchor',
     loTerra: 'LoTerra',
     pylon: 'Pylon',
+    spectrum: 'Spectrum',
     utility: 'Utility'
 }
 
@@ -281,6 +285,14 @@ const widgets = [
         component: LoTerraJackpotPanel,
         settingsComponent: LoTerraJackpotSettings.SettingsPanel,
         defaultSettings: LoTerraJackpotSettings.defaults
+    },
+    {
+        name: 'Spectrum Vaults',
+        group: groups.spectrum,
+        value: 'SpectrumVaults',
+        component: SpectrumVaultsPanel,
+        settingsComponent: SpectrumVaultsSettings.SettingsPanel,
+        defaultSettings: SpectrumVaultsSettings.defaults
     }
 ].sort((a, b) => a.name.localeCompare(b.name)) as RegisteredWidget[];
 
