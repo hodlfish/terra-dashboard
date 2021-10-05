@@ -17,13 +17,18 @@ function SpectrumVaultsPanel(props: WidgetProps) {
         }
     }, []);
 
+    const calculateAPY = (vault: VaultStats) => {
+        const specApy = vault.specApr + vault.specApr * (parseFloat(vaultStats?.govApr || '0')) / 2;
+        return (vault.poolApy + specApy) * 100;
+    }
+
     const sortAssets = () => {
         if (vaultStats) {
             const pairs = Object.entries(vaultStats.pairs);
             if (sortBy === Sorts.apy) {
                 return pairs.sort((a, b) => (
-                        (parseFloat(a[1].poolApy) + parseFloat(a[1].specApr)) < (parseFloat(b[1].poolApy + parseFloat(b[1].specApr)))
-                    ) ? 1 : -1)
+                    calculateAPY(a[1]) < calculateAPY(b[1])
+                ) ? 1 : -1)
             } else {
                 return pairs.sort((a, b) => (
                     parseFloat(a[1].tvl) < parseFloat(b[1].tvl)
@@ -36,14 +41,12 @@ function SpectrumVaultsPanel(props: WidgetProps) {
 
     const renderAsset = (tokenContract: string, vault: VaultStats) => {
         const token = getToken(tokenContract);
-        const specApy = vault.specApr + vault.specApr * (parseFloat(vaultStats?.govApr || '0')) / 2;
-        const apy = (vault.poolApy + specApy) * 100;
         if (token) {
             return (
                 <div key={tokenContract} className="spectrum-vault-container">
                     <img src={token?.icon} alt={token.symbol}/>
                     <div>{token.symbol} - UST</div>
-                    <div>{formatNumber(apy, false, 2, false)}%</div>
+                    <div>{formatNumber(calculateAPY(vault), false, 2, false)}%</div>
                     <div>{formatNumber(parseFloat(vault.tvl), true, 2, true)}</div>
                 </div>
             )
