@@ -18,8 +18,12 @@ function SpectrumVaultsPanel(props: WidgetProps) {
     }, []);
 
     const calculateAPY = (vault: VaultStats) => {
+        const farmApr = vault.farmApr;
         const specApy = vault.specApr + vault.specApr * (parseFloat(vaultStats?.govApr || '0')) / 2;
-        return (vault.poolApy + specApy) * 100;
+        const compoundApy = (vault.poolApy + specApy) * 100;
+        const farmApy = vault.poolApy + vault.poolApy * farmApr / 2;
+        const stakeApy = farmApy + specApy;
+        return Math.max(compoundApy, stakeApy);
     }
 
     const sortAssets = () => {
