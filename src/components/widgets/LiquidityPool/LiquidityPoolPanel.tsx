@@ -1,17 +1,17 @@
 import { useState, useCallback } from "react";
-import { getTerraSwapContract, TerraSwapContractHoldings } from "scripts/Terra/Terraswap";
+import { getLiquidityPoolBalance, LiquidityPoolBalance } from "scripts/Terra/Terra";
 import Panel, { WidgetProps } from "components/panels/Panel";
 import {nativeTokens, cw20Tokens, contracts, getTokenIcon} from 'scripts/Terra/TokensAndContracts';
-import { Settings, defaults, SettingsPanel } from "./TerraSwapContractSettings";
+import { Settings, defaults, SettingsPanel } from "./LiquidityPoolSettings";
 import { formatNumber } from "scripts/Helpers";
 import { hideImgOnError } from "../common";
 
-function TerraSwapContractPanel(props: WidgetProps) {
+function AstroportContractPanel(props: WidgetProps) {
     const {name, contractAddr, flipRatio, refreshRate, decimals} = Object.assign({...defaults}, props.settings as Settings);
-    const [contractHoldings, setContractHoldings] = useState<TerraSwapContractHoldings>();
+    const [contractHoldings, setContractHoldings] = useState<LiquidityPoolBalance>();
 
     const refresh = useCallback(async () => {
-        const data = await getTerraSwapContract(contractAddr);
+        const data = await getLiquidityPoolBalance(contractAddr);
         return () => {
             setContractHoldings(data);
         }
@@ -128,4 +128,4 @@ function TerraSwapContractPanel(props: WidgetProps) {
     );
 }
 
-export default TerraSwapContractPanel;
+export default AstroportContractPanel;

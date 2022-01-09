@@ -6,7 +6,7 @@ import About from 'components/About';
 import Menu from 'components/Menu';
 import Loading from 'components/Loading';
 import { getTokensAndContracts } from 'scripts/Terra/TokensAndContracts';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { getDefaultTemplate, getTheme, setTheme, getDashboards } from 'scripts/LocalStorage';
 import { setGlobalState } from 'hooks/useGlobalState';
 import { chartJSDefaults } from 'scripts/Settings';
@@ -66,16 +66,11 @@ function App() {
                         </div>
                     </div>
                     <div id="page-content">
-                        <Switch>
-                            <Route exact path="/dashboard" component={Dashboard} />
-                            <Route exact path="/about" component={About} />
-                            <Route exact path="/" >
-                                <Redirect to="/dashboard" />
-                            </Route>
-                            <Route path="*">
-                                <Redirect to="/dashboard" />
-                            </Route>
-                        </Switch>
+                        <Routes>
+                            <Route path="/dashboard" element={<Dashboard/>} />
+                            <Route path="/about" element={<About/>} />
+                            <Route path="*" element={<Navigate replace to="/dashboard"/>} />
+                        </Routes>
                     </div>
                 </React.Fragment>
             }

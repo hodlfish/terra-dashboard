@@ -32,7 +32,8 @@ function AddWidgetModal(props: any) {
 
     const getFilteredWidgets = () => {
         const filteredWidgetsMap = new Map() as Map<string, RegisteredWidget[]>;
-        widgets.forEach(w => {
+        const availableWidgets = widgets.filter(w => !w.deprecated);
+        availableWidgets.forEach(w => {
             if (w.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase() || '')) {
                 filteredWidgetsMap.set(w.group, [...filteredWidgetsMap.get(w.group) || [], w]);
             }

@@ -10,9 +10,6 @@ import * as TerraProposalSettings from "./TerraProposals/TerraProposalsSettings"
 import WalletPanel from "./Wallet/WalletPanel";
 import * as WalletSettings from "./Wallet/WalletSettings";
 
-import TerraSwapContractPanel from "./TerraSwapContract/TerraSwapContractPanel";
-import * as TerraSwapContractSettings from "./TerraSwapContract/TerraSwapContractSettings";
-
 import RecentTransactionsPanel from "./RecentTransactions/RecentTransactionsPanel";
 import * as RecentTransactionsSettings from "./RecentTransactions/RecentTransactionsSettings";
 
@@ -73,16 +70,21 @@ import * as LoTerraJackpotSettings from './LoTerraJackpot/LoTerraJackpotSettings
 import SpectrumVaultsPanel from "./SpectrumVaults/SpectrumVaultsPanel";
 import * as SpectrumVaultsSettings from "./SpectrumVaults/SpectrumVaultsSettings";
 
+import LiquidityPoolPanel from "./LiquidityPool/LiquidityPoolPanel";
+import * as LiquidityPoolSettings from "./LiquidityPool/LiquidityPoolSettings";
+
 export interface RegisteredWidget {
     name: string,
     group: string,
     value: string,
     component: () => JSX.Element,
     settingsComponent?: () => JSX.Element,
-    defaultSettings: any
+    defaultSettings: any,
+    deprecated?: boolean
 }
 
 export const groups = {
+    astroport: 'Astroport',
     terra: 'Terra',
     terraSwap: 'TerraSwap',
     mirror: 'Mirror',
@@ -106,9 +108,10 @@ const widgets = [
         name: 'TerraSwap Contract',
         group: groups.terraSwap,
         value: 'TerraSwap',
-        component: TerraSwapContractPanel,
-        settingsComponent: TerraSwapContractSettings.SettingsPanel,
-        defaultSettings: TerraSwapContractSettings.defaults
+        component: LiquidityPoolPanel,
+        settingsComponent: LiquidityPoolSettings.SettingsPanel,
+        defaultSettings: LiquidityPoolSettings.defaults,
+        deprecated: true
     },
     {
         name: 'Terra Proposals',
@@ -293,6 +296,14 @@ const widgets = [
         component: SpectrumVaultsPanel,
         settingsComponent: SpectrumVaultsSettings.SettingsPanel,
         defaultSettings: SpectrumVaultsSettings.defaults
+    },
+    {
+        name: 'Liquidity Pool',
+        group: groups.terra,
+        value: 'LiquidityPool',
+        component: LiquidityPoolPanel,
+        settingsComponent: LiquidityPoolSettings.SettingsPanel,
+        defaultSettings: LiquidityPoolSettings.defaults
     }
 ].sort((a, b) => a.name.localeCompare(b.name)) as RegisteredWidget[];
 

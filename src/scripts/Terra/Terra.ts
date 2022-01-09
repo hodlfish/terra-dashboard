@@ -399,3 +399,29 @@ export async function getWalletStakingBalances(address: string): Promise<Validat
         } as ValidatorDelegation;
     })
 }
+
+export interface LiquidityPoolAsset {
+    amount: string,
+    info: {
+        token?: {
+            contract_addr: string
+        }
+        native_token?: {
+            denom: string;
+        }
+    }
+}
+
+export interface LiquidityPoolBalance {
+    assets: LiquidityPoolAsset[],
+    total_share:  string
+}
+
+export function getLiquidityPoolBalance(address: string): Promise<LiquidityPoolBalance> {
+    const query = encodeURI(JSON.stringify({
+        pool: {}
+    }));
+    return axios.get(`${sources.terraFCD.dataUrl}/wasm/contracts/${address}/store?query_msg=${query}`).then(response => {
+        return response.data.result as LiquidityPoolBalance;
+    });
+}

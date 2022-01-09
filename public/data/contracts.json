@@ -367,7 +367,7 @@
     "terra1tndcaqxkpc5ce9qee5ggqf430mr2z3pefe5wj6": {
         "protocol": "Terraswap",
         "name": "LUNA-UST Pair",
-        "icon": "https://assets.terra.money/icon/60/UST.png"
+        "icon": "https://assets.terra.money/icon/60/Luna.png"
     },
     "terra17dkr9rnmtmu7x4azrpupukvur2crnptyfvsrvr": {
         "protocol": "Terraswap",
@@ -618,5 +618,130 @@
         "protocol": "Spectrum",
         "name": "SPEC Pylon Farm",
         "icon": "https://terra.spec.finance/assets/SPEC.png"
+    },
+    "terra1m6ywlgn6wrjuagcmmezzz2a029gtldhey5k552": {
+        "protocol": "Astroport",
+        "name": "LUNA-UST Pair",
+        "icon": "https://assets.terra.money/icon/60/Luna.png"
+    },
+    "terra1j66jatn3k50hjtg2xemnjm8s7y8dws9xqa5y8w": {
+        "protocol": "Astroport",
+        "name": "Luna-bLuna Pair",
+        "icon": "https://whitelist.anchorprotocol.com/logo/bLUNA.png"
+    },
+    "terra1l7xu2rl3c7qmtx3r5sd2tz25glf6jh8ul7aag7": {
+        "protocol": "Astroport",
+        "name": "ASTRO-UST Pair",
+        "icon": "https://finder.extraterrestrial.money/images/SVG/ASTRO.svg"
+    },
+    "terra1qr2k6yjjd5p2kaewqvg93ag74k6gyjr7re37fs": {
+        "protocol": "Astroport",
+        "name": "ANC-UST Pair",
+        "icon": "https://whitelist.anchorprotocol.com/logo/ANC.png"
+    },
+    "terra143xxfw5xf62d5m32k3t4eu9s82ccw80lcprzl9": {
+        "protocol": "Astroport",
+        "name": "MIR-UST Pair",
+        "icon": "https://whitelist.mirror.finance/icon/MIR.png"
+    },
+    "terra134m8n2epp0n40qr08qsvvrzycn2zq4zcpmue48": {
+        "protocol": "Astroport",
+        "name": "MINE-UST Pair",
+        "icon": "https://assets.pylon.rocks/logo/MINE.png"
+    },
+    "terra1m95udvvdame93kl6j2mk8d03kc982wqgr75jsr": {
+        "protocol": "Astroport",
+        "name": "STT-UST Pair",
+        "icon": "https://app.terraswap.io/images/CW20/STT.png"
+    },
+    "terra1mxyp5z27xxgmv70xpqjk7jvfq54as9dfzug74m": {
+        "protocol": "Astroport",
+        "name": "ORION-UST Pair",
+        "icon": "https://raw.githubusercontent.com/etfinder/assets/master/extra/icon/60/ORION.png"
+    },
+    "terra1zpnhtf9h5s7ze2ewlqyer83sr4043qcq64zfc4": {
+        "protocol": "Astroport",
+        "name": "APOLLO-UST Pair",
+        "icon": "https://finder.extraterrestrial.money/images/APOLLO60.png"
+    },
+    "terra1v5ct2tuhfqd0tf8z0wwengh4fg77kaczgf6gtx": {
+        "protocol": "Astroport",
+        "name": "PSI-UST Pair",
+        "icon": "https://terra.nexusprotocol.app/assets/psi.png"
+    },
+    "terra15s2wgdeqhuc4gfg7sfjyaep5cch38mwtzmwqrx": {
+        "protocol": "Astroport",
+        "name": "VKR-UST Pair",
+        "icon": "https://app.valkyrieprotocol.com/icon_vkr.png"
+    },
+    "terra1cpzkckgzz90pq8fkumdjc58ee5llrxt2yka9fp": {
+        "protocol": "Loop",
+        "name": "MIR-UST Pair",
+        "icon": "https://whitelist.mirror.finance/icon/MIR.png"
+    },
+    "terra1jfp5ew4tsru98wthajsqegtzaxt49ty4z2qws0": {
+        "protocol": "Loop",
+        "name": "TWD-UST Pair",
+        "icon": "https://finder.extraterrestrial.money/images/TWD100.png"
+    },
+    "terra106a00unep7pvwvcck4wylt4fffjhgkf9a0u6eu": {
+        "protocol": "Loop",
+        "name": "LOOP-UST Pair",
+        "icon": "https://loop.markets/token/logo2.png"
+    },
+    "terra154jt8ppucvvakvqa5fyfjdflsu6v83j4ckjfq3": {
+        "protocol": "Loop",
+        "name": "LOOP-LOOPR Pair",
+        "icon": "https://loop.markets/token/logo3.png"
+    },
+    "terra1dw5j23l6nwge69z0enemutfmyc93c36aqnzjj5": {
+        "protocol": "Loop",
+        "name": "LOOPR-UST Pair",
+        "icon": "https://loop.markets/token/logo3.png"
+    },
+    "terra1jkr0ef9fpghdru38ht70ds6jfldprgttw6xlek": {
+        "protocol": "Loop",
+        "name": "SPEC-UST Pair",
+        "icon": "https://terra.spec.finance/assets/SPEC.png"
+    },
+    "terra1lgazu0ltsxm3ayellqa2mhnhlvgx3hevkqeqy2": {
+        "protocol": "Loop",
+        "name": "STT-UST Pair",
+        "icon": "https://app.terraswap.io/images/CW20/STT.png"
+    },
+    "terra13eggta6zqfg03mxgqg9p5paqka7tgaaxnkhuuu": {
+        "protocol": "Loop",
+        "name": "MINE-UST Pair",
+        "icon": "https://assets.pylon.rocks/logo/MINE.png"
+    },
+    "terra1f6d3pggq7h2y7jrgwxp3xh08yhvj8znalql87h": {
+        "protocol": "Loop",
+        "name": "ANC-UST Pair",
+        "icon": "https://whitelist.anchorprotocol.com/logo/ANC.png"
+    },
+    "terra15568nqrqcawm263yqcuuuvj5mh763tp8jyscq3": {
+        "protocol": "Loop",
+        "name": "LOTA-UST Pair",
+        "icon": "https://loterra.io/LOTA.png"
+    },
+    "terra1whns5nyc8sw328uw3qqnyafxd5yfqsytkdkgqz": {
+        "protocol": "Loop",
+        "name": "ALTE-UST Pair",
+        "icon": "https://app.alteredprotocol.com/alte.png"
+    },
+    "terra1yjg0tuhc6kzwz9jl8yqgxnf2ctwlfumnvscupp": {
+        "protocol": "Loop",
+        "name": "HALO-UST Pair",
+        "icon": "https://finder.extraterrestrial.money/images/HALO60.png"
+    },
+    "terra178yhudw6cwtnrn4fq593z87y385m0xe9n6x423": {
+        "protocol": "Loop",
+        "name": "DPH-UST Pair",
+        "icon": "https://digipharm.io/wp-content/uploads/2021/02/digipharm_etherscan_logo.png"
+    },
+    "terra1v93ll6kqp33unukuwls3pslquehnazudu653au": {
+        "protocol": "Loop",
+        "name": "Luna-bLuna Pair",
+        "icon": "https://whitelist.anchorprotocol.com/logo/bLUNA.png"
     }
 }

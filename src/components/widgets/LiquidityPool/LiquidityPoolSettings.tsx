@@ -4,14 +4,22 @@ import { MAX_REFRESH_RATE, MIN_REFRESH_RATE } from '../common';
 import DataSource from "components/DataSource";
 import { sources } from "scripts/Settings";
 
+export const Protocols = {
+    terraswap: 'Terraswap',
+    astroport: 'Astroport',
+    loop: 'Loop'
+}
+
 export const defaults = {
     flipRatio: true,
+    protocol: Protocols.terraswap,
     refreshRate: 30,
     decimals: 2
 }
 
 export interface Settings {
     name?: string,
+    protocol: string,
     contractAddr: string,
     flipRatio?: boolean,
     refreshRate?: number,
@@ -29,18 +37,20 @@ const dataSources = [
 ]
 
 export function SettingsPanel(props: SettingsPanelProps) {
-    const {name, contractAddr, flipRatio, refreshRate, decimals} = Object.assign({...defaults}, props.settings);
-    const [terraswapPairs, setTerraswapPairs] = useState<any[]>([]);
+    const {name, protocol, contractAddr, flipRatio, refreshRate, decimals} = Object.assign({...defaults}, props.settings);
+    const [pairs, setPairs] = useState<any[]>([]);
+    const [dex, setDex] = useState<string>(protocol);
 
     useEffect(() => {
-        setTerraswapPairs(displayContracts('Terraswap', 'Pair'));
-    }, [])
+        setPairs(displayContracts(dex, 'Pair'));
+    }, [dex])
 
     const onFormSubmit = (e: any) => {
         e.preventDefault();
         const form = e.target
         const newSettings = {...props.settings};
         newSettings.name = form.name.value || undefined;
+        newSettings.protocol = form.protocol.value;
         newSettings.contractAddr = form.contractAddr.value;
         newSettings.flipRatio = form.flipRatio.checked;
         newSettings.refreshRate = parseInt(form.refreshRate.value);
@@ -51,13 +61,20 @@ export function SettingsPanel(props: SettingsPanelProps) {
     return (
         <form id="settings-form" onSubmit={onFormSubmit}>
             <DataSource links={dataSources}/>
+
             <label>Custom Title</label>
             <input type="text" name="name" defaultValue={name}/>
-            {terraswapPairs.length > 0 && 
+            <label>Protocol</label>
+            <select name="protocol" defaultValue={dex} onChange={e => setDex(e.target.value)}>
+                {Object.values(Protocols).map(format => 
+                    <option key={format} value={format}>{format}</option>
+                )}
+            </select>
+            {pairs.length > 0 && 
                 <React.Fragment>
                     <label>Swap Contract Address</label>
                     <select name="contractAddr" defaultValue={contractAddr}>
-                        {terraswapPairs.map(pair => 
+                        {pairs.map(pair => 
                             <option key={pair.contract} value={pair.contract}>{pair.name}</option>
                         )}
                     </select>
