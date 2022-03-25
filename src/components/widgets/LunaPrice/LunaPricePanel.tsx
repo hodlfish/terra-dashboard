@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { getLunaPrice, LunaPriceIntervals } from "scripts/Terra/Terra";
 import Panel, { WidgetProps } from "components/panels/Panel";
 import { defaults, Settings, SettingsPanel } from './LunaPriceSettings';
-import { Line } from "react-chartjs-2";
+import { Chart } from "react-chartjs-2";
 import { formatTimestamp, TimestampFormats, getStyleColor } from 'scripts/Helpers';
 import { defaultLineChartOptions } from "../common";
 
@@ -50,7 +50,7 @@ function LunaPricePanel(props: WidgetProps) {
                     <div className="graph-label">$LUNA: {lunaPrice} UST</div>
                     {graphData &&
                         <div className="graph-container">
-                            <Line data={graphData} options={defaultLineChartOptions}/>
+                            <Chart type="line" data={graphData} options={defaultLineChartOptions}/>
                         </div>
                     }
                 </div>

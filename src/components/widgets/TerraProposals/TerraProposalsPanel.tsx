@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { getTerraProposals, TerraProposalStatus, Proposal } from 'scripts/Terra/Terra';
 import Panel, { WidgetProps } from 'components/panels/Panel';
 import { Settings, defaults, SettingsPanel } from './TerraProposalsSettings';
-import { Pie } from 'react-chartjs-2';
+import { Chart } from 'react-chartjs-2';
 import { defaultPieChartOptions } from '../common';
 
 function TerraProposals(props: WidgetProps) {
@@ -38,7 +38,7 @@ function TerraProposals(props: WidgetProps) {
     const generateVoteData = (proposal: Proposal) => {
         const labels = ['Yes', 'Abstain', 'No', 'NoWithVeto'];
         const votes = proposal.vote.distribution;
-        const data = [votes.Yes, votes.Abstain,votes.No, votes.NoWithVeto];
+        const data = [Number(votes.Yes), Number(votes.Abstain), Number(votes.No), Number(votes.NoWithVeto)];
         return {
             labels: labels,
             datasets: [
@@ -71,7 +71,7 @@ function TerraProposals(props: WidgetProps) {
             <div key={proposal.id} className="proposal" onClick={() => onOpenProposal(proposal)}>
                 <div className="proposal-title">#{proposal.id}: {proposal.title}</div>
                 <div className="proposal-graph-container">
-                    <Pie options={defaultPieChartOptions} data={graphData}/>
+                    <Chart type="pie" data={graphData} options={defaultPieChartOptions}/>
                 </div>
                 <div className="proposal-end-date">Ends {endTime.toLocaleString()}</div>
             </div>

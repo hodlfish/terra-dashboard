@@ -9,7 +9,10 @@ import { getTokensAndContracts } from 'scripts/Terra/TokensAndContracts';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getDefaultTemplate, getTheme, setTheme, getDashboards } from 'scripts/LocalStorage';
 import { setGlobalState } from 'hooks/useGlobalState';
-import { chartJSDefaults } from 'scripts/Settings';
+// TODO: Move chart js defaults to new location
+import {Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Filler, defaults, Tooltip} from 'chart.js'
+ChartJS.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip);
+defaults.animation = false;
 
 function App() {
     const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -17,7 +20,6 @@ function App() {
 
     // Initialize dashboards and assets.
     useEffect(() => {
-        chartJSDefaults();
         setDarkMode(getTheme().dark);
         setGlobalState('dashboards', { ...getDashboards() });
         setGlobalState('selectedDashboard', getDefaultTemplate());

@@ -1,9 +1,3 @@
-import { defaults as chartDefaults } from 'react-chartjs-2';
-
-export function chartJSDefaults(): void {
-    chartDefaults.animation = false;
-}
-
 export interface DataSource {
     icon?: string,
     name: string,
