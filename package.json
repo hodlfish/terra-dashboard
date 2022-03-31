@@ -40,7 +40,7 @@
     },
     "scripts": {
         "start": "react-app-rewired start",
-        "build": "react-app-rewired build",
+        "build": "react-app-rewired build --aot --prod",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
