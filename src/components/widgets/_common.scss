@@ -38,6 +38,20 @@
     }
 }
 
+.graph-widget {
+    display: grid;
+    padding: 12px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+
+    .graph-container {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .labeled-graph-widget {
     display: grid;
     grid-template-rows: 40px 1fr;
@@ -61,6 +75,7 @@
     overflow: hidden;
 
     .data-list {
+        position: relative;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
@@ -98,13 +113,23 @@
                 }
             }
         }
+
+        .corner-icon {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            width: 40px;
+            height: 40px;
+            z-index: 1;
+            cursor: pointer;
+        }
     }
 
     .space-evenly {
         justify-content: space-between;
     }
 
-    svg {
+    .background-svg {
         position:absolute;
         height: 100%;
         top: 0px;
@@ -150,12 +175,12 @@
         box-shadow: $shadow-1 2px 2px 4px;
         border-radius: 6px;
         padding: 12px;
-        background-color: $bg-1;
+        background-color: $bg-3;
         margin: 12px;
         cursor: pointer;
 
         &:hover {
-            background-color: $bg-3;
+            background-color: $bg-1;
         }
 
         .proposal-title {

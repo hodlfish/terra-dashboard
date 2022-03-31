@@ -1,0 +1,28 @@
+#theme-settings-component {
+    .theme-settings {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 12px;
+        justify-content: center;
+
+        .setting-item {
+            border-radius: $panel-border-radius;
+            display: grid;
+            grid-template-rows: 16px min-content;
+            background-color: $bg-2;
+            box-shadow: $shadow-1 0px 2px 4px;
+            padding: 12px;
+            margin: 6px;
+
+            .setting-item-title {
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .setting-item-tool {
+                margin: 6px auto;
+            }
+        }
+    }
+}

@@ -3,8 +3,8 @@ import { getHistoricalCollaterals } from "scripts/Terra/Anchor";
 import Panel, { WidgetProps } from "components/panels/Panel";
 import { defaults, Settings, SettingsPanel } from './AnchorTotalCollateralSettings';
 import { Line } from "react-chartjs-2";
-import { formatTimestamp, TimestampFormats, getStyleColor } from 'scripts/Helpers';
-import { defaultLineChartOptions } from "../common";
+import { formatTimestamp, TimestampFormats } from 'scripts/Helpers';
+import { defaultLineChartOptions, getGraphBackgroundColor, getGraphBorderColor } from "../common";
 
 function AnchorTotalCollateralPanel(props: WidgetProps) {
     const {name, timeSpan} = Object.assign({...defaults}, props.settings as Settings);
@@ -20,8 +20,8 @@ function AnchorTotalCollateralPanel(props: WidgetProps) {
                     {
                         label: 'Collateral',
                         data: data.map(d => (parseInt(d.total_value) / 1000000)),
-                        backgroundColor: `${getStyleColor('icon-1')}44`,
-                        borderColor: getStyleColor('icon-2'),
+                        backgroundColor: getGraphBackgroundColor(),
+                        borderColor: getGraphBorderColor(),
                         fill: true
                     }
                 ]

@@ -1,24 +1,27 @@
 import { useState, useCallback } from 'react';
-import { getTerraProposals, TerraProposalStatus, Proposal } from 'scripts/Terra/Terra';
 import Panel, { WidgetProps } from 'components/panels/Panel';
 import { Settings, defaults, SettingsPanel } from './TerraProposalsSettings';
-import { Pie } from 'react-chartjs-2';
+import { Chart } from 'react-chartjs-2';
 import { defaultPieChartOptions } from '../common';
+import useTerraLCDClient from 'hooks/useTerraLCDClient';
+import { Proposal } from '@terra-money/terra.js';
 
 function TerraProposals(props: WidgetProps) {
     const {name, filter} = Object.assign({...defaults}, props.settings as Settings);
     const [proposals, setProposals] = useState<Proposal[]>([]);
+    const {MIN_PROPOSAL_DEPOSIT, getProposals} = useTerraLCDClient();
 
     const refresh = useCallback(async () => {
-        const proposals = await getTerraProposals(filter);
+        const proposals = await getProposals(filter);
         return () => {
             setProposals(proposals);
         }
     }, [filter]);
 
     const generateDepositData = (proposal: Proposal) => {
-        const depositedLuna = parseInt(proposal.deposit.totalDeposit[0].amount) / 1000000;
-        const requiredLuna = parseInt(proposal.deposit.minDeposit[0].amount) / 1000000;
+        const depositedLunaCoin = proposal.total_deposit.get('uluna');
+        const depositedLuna = (depositedLunaCoin) ? depositedLunaCoin.amount.toNumber() / 1000000 : 0;
+        const requiredLuna = MIN_PROPOSAL_DEPOSIT / 1000000;
         const data = {
             labels: ['Deposited', 'Required'],
             datasets: [
@@ -37,8 +40,8 @@ function TerraProposals(props: WidgetProps) {
 
     const generateVoteData = (proposal: Proposal) => {
         const labels = ['Yes', 'Abstain', 'No', 'NoWithVeto'];
-        const votes = proposal.vote.distribution;
-        const data = [votes.Yes, votes.Abstain,votes.No, votes.NoWithVeto];
+        const votes = proposal.final_tally_result;
+        const data = [Number(votes.yes), Number(votes.abstain), Number(votes.no), Number(votes.no_with_veto)];
         return {
             labels: labels,
             datasets: [
@@ -62,16 +65,16 @@ function TerraProposals(props: WidgetProps) {
 
 
     const renderProposal = (proposal: Proposal) => {
-        let endTime = new Date(proposal.vote.votingEndTime);
-        if (proposal.status === TerraProposalStatus.deposit) {
-            endTime = new Date(proposal.deposit.depositEndTime);
+        let endTime = new Date(proposal.voting_end_time);
+        if (proposal.status === Proposal.Status.PROPOSAL_STATUS_DEPOSIT_PERIOD) {
+            endTime = new Date(proposal.deposit_end_time);
         }
-        const graphData = (proposal.status === TerraProposalStatus.deposit) ? generateDepositData(proposal) : generateVoteData(proposal);
+        const graphData = (proposal.status === Proposal.Status.PROPOSAL_STATUS_DEPOSIT_PERIOD) ? generateDepositData(proposal) : generateVoteData(proposal);
         return (
             <div key={proposal.id} className="proposal" onClick={() => onOpenProposal(proposal)}>
-                <div className="proposal-title">#{proposal.id}: {proposal.title}</div>
+                <div className="proposal-title">#{proposal.id}: {proposal.content.title}</div>
                 <div className="proposal-graph-container">
-                    <Pie options={defaultPieChartOptions} data={graphData}/>
+                    <Chart type="pie" data={graphData} options={defaultPieChartOptions}/>
                 </div>
                 <div className="proposal-end-date">Ends {endTime.toLocaleString()}</div>
             </div>

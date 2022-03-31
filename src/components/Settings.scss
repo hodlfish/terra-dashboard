@@ -1,0 +1,42 @@
+#settings-component {
+    position: relative;
+    display: grid;
+    grid-template-rows: 60px 1fr;
+
+    #settings-toolbar {
+        background-color: $bg-2;
+        box-shadow: $shadow-1 0px 2px 4px;
+        height: 60px;
+    }
+
+    #settings-items {
+        margin: auto;
+        display: grid;
+        width: 1200px;
+        max-width: 90vw;
+
+        .settings-item {
+            display: grid;
+            grid-template-rows: 60px 1fr;
+            margin: 12px;
+            background-color: $bg-2;
+            border-radius: $panel-border-radius;
+            box-shadow: $shadow-1 0px 2px 4px;
+            overflow: hidden;
+
+            .settings-item-title {
+                padding: 16px;
+                font-size: 24px;
+                font-weight: bold;
+                background-color: $bg-1;
+                box-shadow: $shadow-1 0px 2px 4px;
+                z-index: 1;
+            }
+
+            .settings-item-content {
+                padding: 16px;
+                background-color: $bg-2;
+            }
+        }
+    }
+}

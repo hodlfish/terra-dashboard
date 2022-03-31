@@ -62,7 +62,7 @@ function MineOverviewPanel(props: WidgetProps) {
                             <div className="data">{displayData?.mineUstPoolAPY}%</div>
                         </div>
                     </div>
-                    <svg>
+                    <svg className="background-svg">
                         <use href="#pylon"/>
                     </svg>
                 </div>

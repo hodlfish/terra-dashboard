@@ -63,9 +63,22 @@ export function formatTimestamp(timestamp: any, format: TimestampFormats = Times
     }
 }
 
-export function generateId() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+export function generateId(prefix ?: string) {
+    const id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         const r = Math.random() * 16 | 0, v = c === 'x' ? r : ((r & 0x3) | 0x8);
         return v.toString(16);
     });
+    return prefix ? `${prefix}-${id}` : id;
+}
+
+export function downloadJSON(name: string, data: any) {
+    const json = JSON.stringify(data, null, 4);
+    const blob = new Blob([json],{type:'application/json'});
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = `${name}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }

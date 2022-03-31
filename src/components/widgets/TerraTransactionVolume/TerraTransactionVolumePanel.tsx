@@ -3,9 +3,9 @@ import { getTerraTransactionVolume } from "scripts/Terra/Terra";
 import Panel, { WidgetProps } from "components/panels/Panel";
 import { defaults, Settings, SettingsPanel, GraphFormats } from './TerraTransactionVolumeSettings';
 import { Line } from "react-chartjs-2";
-import { formatTimestamp, TimestampFormats, getStyleColor } from 'scripts/Helpers';
+import { formatTimestamp, TimestampFormats } from 'scripts/Helpers';
 import { nativeTokens } from "scripts/Terra/TokensAndContracts";
-import { defaultLineChartOptions } from "../common";
+import { defaultLineChartOptions, getGraphBackgroundColor, getGraphBorderColor } from "../common";
 
 function TerraTransactionVolumePanel(props: WidgetProps) {
     const {name, denom, format, timeSpan} = Object.assign({...defaults}, props.settings as Settings);
@@ -33,8 +33,8 @@ function TerraTransactionVolumePanel(props: WidgetProps) {
                 {
                     label: 'Transaction Volume',
                     data: data.map((d: any) => (parseInt(d.txVolume) / 1000000)),
-                    backgroundColor: `${getStyleColor('icon-1')}44`,
-                    borderColor: getStyleColor('icon-2'),
+                    backgroundColor: getGraphBackgroundColor(),
+                    borderColor: getGraphBorderColor(),
                     fill: true
                 }
             ]

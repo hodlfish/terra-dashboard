@@ -20,15 +20,14 @@
 
     #modal-content {
         position: relative;
-        background-color: $bg-1;
+        background-color: $bg-2;
         z-index: 1;
         width: 90vw;
         max-width: 600px;
         height: min-content;
         max-height: unquote("min(800px, 90vh)");
         margin: auto;
-        border-radius:12px;
-        padding: 12px;
+        border-radius: $panel-border-radius;
         box-shadow: $shadow-1 0px 2px 4px;
         overflow: hidden;
 
@@ -36,6 +35,8 @@
             text-align: center;
             font-size: 32px;
             padding: 12px;
+            background-color: $bg-1;
+            box-shadow: $shadow-1 0px 2px 4px;
         }
 
         #close-modal-button {
@@ -44,7 +45,7 @@
             top: 0px;
             cursor: pointer;
             fill: $icon-1;
-            margin: 12px;
+            margin: 18px;
 
             &:hover {
                 fill: $icon-2;

@@ -62,7 +62,7 @@ function AnchorRatesPanel(props: WidgetProps) {
                             <div className="data">{rateData?.lpRewards}%</div>
                         </div>
                     </div>
-                    <svg>
+                    <svg className="background-svg">
                         <use href="#anchor"/>
                     </svg>
                 </div>

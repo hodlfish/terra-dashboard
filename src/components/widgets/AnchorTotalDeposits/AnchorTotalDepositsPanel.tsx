@@ -3,8 +3,8 @@ import { getHistoricalDeposits, getHistoricalBorrows } from "scripts/Terra/Ancho
 import Panel, { WidgetProps } from "components/panels/Panel";
 import { defaults, Settings, SettingsPanel } from './AnchorTotalDepositsSettings';
 import { Line } from "react-chartjs-2";
-import { formatTimestamp, TimestampFormats, getStyleColor } from 'scripts/Helpers';
-import { defaultLineChartOptions } from "../common";
+import { formatTimestamp, TimestampFormats } from 'scripts/Helpers';
+import { defaultLineChartOptions, getGraphBackgroundColor, getGraphBorderColor } from "../common";
 
 interface PanelDataPoint {
     timestamp: number,
@@ -43,15 +43,15 @@ function AnchorTotalDepositsPanel(props: WidgetProps) {
                 {
                     label: 'Deposited',
                     data: data.map(d => (parseInt(d.deposit) / 1000000)),
-                    backgroundColor: `${getStyleColor('icon-1')}44`,
-                    borderColor: getStyleColor('icon-2'),
+                    backgroundColor: getGraphBackgroundColor(),
+                    borderColor: getGraphBorderColor(),
                     fill: true
                 },
                 {
                     label: 'Borrowed',
                     data: data.map(d => (parseInt(d.borrow) / 1000000)),
-                    backgroundColor: `${getStyleColor('icon-1')}44`,
-                    borderColor: getStyleColor('icon-2'),
+                    backgroundColor: getGraphBackgroundColor(),
+                    borderColor: getGraphBorderColor(),
                     fill: true
                 }
             ]

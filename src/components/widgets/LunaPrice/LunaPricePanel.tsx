@@ -2,9 +2,9 @@ import { useState, useCallback } from "react";
 import { getLunaPrice, LunaPriceIntervals } from "scripts/Terra/Terra";
 import Panel, { WidgetProps } from "components/panels/Panel";
 import { defaults, Settings, SettingsPanel } from './LunaPriceSettings';
-import { Line } from "react-chartjs-2";
-import { formatTimestamp, TimestampFormats, getStyleColor } from 'scripts/Helpers';
-import { defaultLineChartOptions } from "../common";
+import { Chart } from "react-chartjs-2";
+import { formatTimestamp, TimestampFormats } from 'scripts/Helpers';
+import { defaultLineChartOptions, getGraphBackgroundColor, getGraphBorderColor } from "../common";
 
 function LunaPricePanel(props: WidgetProps) {
     const {name, interval, refreshRate, decimals} = Object.assign({...defaults}, props.settings as Settings);
@@ -26,8 +26,8 @@ function LunaPricePanel(props: WidgetProps) {
                 datasets: [
                     {
                         data: data.prices.map((p: any) => parseFloat(p.price).toFixed(decimals)),
-                        backgroundColor: `${getStyleColor('icon-1')}44`,
-                        borderColor: getStyleColor('icon-2'),
+                        backgroundColor: getGraphBackgroundColor(),
+                        borderColor: getGraphBorderColor(),
                         fill: true
                     }
                 ]
@@ -50,7 +50,7 @@ function LunaPricePanel(props: WidgetProps) {
                     <div className="graph-label">$LUNA: {lunaPrice} UST</div>
                     {graphData &&
                         <div className="graph-container">
-                            <Line data={graphData} options={defaultLineChartOptions}/>
+                            <Chart type="line" data={graphData} options={defaultLineChartOptions}/>
                         </div>
                     }
                 </div>

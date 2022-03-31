@@ -1,8 +1,6 @@
 #text-box-component {
     position: relative;
     height: 60px;
-    width: 100%;
-    overflow: hidden;
 
     #text-edit {
         height: 60px;
@@ -13,12 +11,10 @@
         right: 0px;
         top: 0px;
         bottom: 0px;
-        min-width: 200px;
         z-index: 1;
 
         input {
             margin: 9px 6px;
-            // width: max-content;
         }
 
         button {
@@ -46,7 +42,8 @@
         position: relative;
         overflow: hidden;
         white-space: nowrap;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr min-content;
         z-index: 1;
 
         #display-value {

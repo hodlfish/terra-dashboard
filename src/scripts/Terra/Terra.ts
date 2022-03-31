@@ -1,69 +1,6 @@
 import axios from 'axios';
 import { sources } from 'scripts/Settings';
 
-export const TerraProposalStatus = {
-    passed: 'Passed',
-    rejected: 'Rejected',
-    voting: 'Voting',
-    deposit: 'Deposit',
-    failed: 'Failed'
-}
-
-interface ProposalDeposit {
-    depositEndTime: string,
-    totalDeposit: any[],
-    minDeposit: any[]
-}
-
-interface ProposalProducer {
-    accountAddress: string
-}
-
-interface ProposalVoteGroups {
-    Abstain: string,
-    No: string,
-    NoWithVeto: string,
-    Yes: string
-}
-
-interface ProposalVote {
-    count: ProposalVoteGroups,
-    distribution: ProposalVoteGroups,
-    stakedLuna: number,
-    total: number
-    voters: any,
-    votingEndTime: string
-}
-
-export interface Proposal {
-    id: string,
-    deposit: ProposalDeposit
-    description: string,
-    proposer: ProposalProducer
-    status: string
-    submitTime: string
-    title: string
-    type: string
-    vote: ProposalVote
-}
-
-interface ProposalsResponse {
-    maxDepositPeriod: string,
-    minDeposit: any[],
-    proposals: Proposal[],
-    votingPeriod: string
-}
-
-export function getTerraProposals(status: string | undefined = undefined): Promise<Proposal[]> {
-    const query: {[k: string]: any} = {};
-    if (status) {
-        query.status = status;
-    }
-    return axios.get(`${sources.terraFCD.dataUrl}/v1/gov/proposals`, {params: query}).then(response => {
-        return (response.data as ProposalsResponse).proposals.sort((a: any, b: any) => (parseInt(b.id) - parseInt(a.id)));
-    });
-}
-
 export interface LunaPricePoint {
     denom: string,
     price: number,

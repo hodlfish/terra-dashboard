@@ -9,11 +9,10 @@
         box-shadow: $shadow-1 0px 2px 4px;
 
         #dashboard-toolbar-container {
-            max-width: 1200px;
             width: 100%;
             margin: auto;
             display: grid;
-            grid-template-columns: 1fr max-content;
+            grid-template-columns: min-content 1fr min-content;
 
             .dashboard-tool {
                 fill: $icon-1;

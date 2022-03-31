@@ -7,41 +7,41 @@ import Menu from 'components/Menu';
 import Loading from 'components/Loading';
 import { getTokensAndContracts } from 'scripts/Terra/TokensAndContracts';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { getDefaultTemplate, getTheme, setTheme, getDashboards } from 'scripts/LocalStorage';
 import { setGlobalState } from 'hooks/useGlobalState';
-import { chartJSDefaults } from 'scripts/Settings';
+import Settings from 'components/Settings';
+import { getDashboards, getDefaultDashboard } from 'scripts/storage/dashboard-storage';
+import { getDefaultTheme, getThemes } from 'scripts/storage/theme-storage';
+import { applyThemeSettings } from 'scripts/Themes';
 
 function App() {
-    const [darkMode, setDarkMode] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
     // Initialize dashboards and assets.
     useEffect(() => {
-        chartJSDefaults();
-        setDarkMode(getTheme().dark);
+        // Themes
+        const theme = getDefaultTheme();
+        applyThemeSettings(theme.settings);
+        setGlobalState('themes', {... getThemes()});
+        setGlobalState('selectedTheme', theme);
+
+        // Dashboards
         setGlobalState('dashboards', { ...getDashboards() });
-        setGlobalState('selectedDashboard', getDefaultTemplate());
+        setGlobalState('selectedDashboard', getDefaultDashboard());
+
+        // Tokens and Contracts
         getTokensAndContracts().then(() => {
             setLoading(false)
         })
     }, []);
 
-    const setPageTheme = (dark: boolean) => {
-        setTheme(dark);
-        setDarkMode(dark);
-    }
-
-    const getAppClass = () => {
-        return (darkMode ? 'theme-dark' : 'theme-light');
-    }
-
     const links = [
         { 'name': 'Dashboard', 'path': '/dashboard' },
+        { 'name': 'Settings', 'path': '/settings' },
         { 'name': 'About', 'path': '/about' },
     ];
 
     return (
-        <div id="app-component" className={getAppClass()}>
+        <div id="app-component">
             <Icons />
             {loading ?
                 <div id="app-loading">
@@ -51,23 +51,16 @@ function App() {
                 <React.Fragment>
                     <div id="header">
                         <div id="header-container">
-                            <div id="header-title">
-                                <svg height="32" width="32">
-                                    <use href="#logo" />
-                                </svg>
-                                <div id="title-text">Terra Dashboard</div>
-                                <Menu links={links} />
-                            </div>
-                            <div id="header-icons">
-                                <svg id="theme-toggle" height="32" width="32" onClick={() => setPageTheme(!darkMode)}>
-                                    <use href={darkMode ? '#luna' : '#terra'} />
-                                </svg>
-                            </div>
+                            <svg id="header-icon" height="32" width="32">
+                                <use href="#logo" />
+                            </svg>
+                            <Menu links={links} />
                         </div>
                     </div>
                     <div id="page-content">
                         <Routes>
                             <Route path="/dashboard" element={<Dashboard/>} />
+                            <Route path="/settings" element={<Settings/>} />
                             <Route path="/about" element={<About/>} />
                             <Route path="*" element={<Navigate replace to="/dashboard"/>} />
                         </Routes>
