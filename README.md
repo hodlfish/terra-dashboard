@@ -29,7 +29,3 @@ Run local development server...
 Build site for distribution...
 
 `npm run build --aot --prod`
-
-
-## Contribute
-Notes on contributing to the repo can be found in CONTRIBUTE.md.
