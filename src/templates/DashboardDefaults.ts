@@ -1,5 +1,5 @@
 export const template = {
-    "id": "terra-overview-template",
+    "id": "dashboard-terra-template",
     "version": "v0.1",
     "name": "Terra Overview",
     "dashboard": [

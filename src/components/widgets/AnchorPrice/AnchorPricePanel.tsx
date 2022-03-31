@@ -3,8 +3,8 @@ import { getANCHistoricalPrices, getANCPrice } from "scripts/Terra/Anchor";
 import Panel, {WidgetProps} from "components/panels/Panel";
 import { Line } from "react-chartjs-2";
 import { defaults, Settings, SettingsPanel } from './AnchorPriceSettings';
-import { formatTimestamp, getStyleColor, TimestampFormats } from 'scripts/Helpers';
-import { defaultLineChartOptions } from "../common";
+import { formatTimestamp, TimestampFormats } from 'scripts/Helpers';
+import { defaultLineChartOptions, getGraphBackgroundColor, getGraphBorderColor } from "../common";
 
 function AnchorPricePanel(props: WidgetProps) {
     const {name, decimals} = Object.assign({...defaults}, props.settings as Settings);
@@ -22,8 +22,8 @@ function AnchorPricePanel(props: WidgetProps) {
                     {
                         label: 'Anchor Price',
                         data: historicalData.map(d => parseFloat(d.anc_price) as number),
-                        backgroundColor: `${getStyleColor('icon-1')}44`,
-                        borderColor: getStyleColor('icon-2'),
+                        backgroundColor: getGraphBackgroundColor(),
+                        borderColor: getGraphBorderColor(),
                         fill: true
                     }
                 ]

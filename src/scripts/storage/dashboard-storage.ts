@@ -1,9 +1,9 @@
 import { generateId } from "scripts/Helpers";
-import { template } from "templates/default";
+import { template as dashboardTemplate } from "templates/DashboardDefaults";
 
 export const DASHBOARDS = 'dashboards';
-export const THEME = 'theme';
-export const CURRENT_TEMPLATE_VERSION = 'v0.1';
+export const DASHBOARD_PREFIX = 'dashboard';
+export const DASHBOARD_TEMPLATE_VERSION = 'v0.1';
 
 export interface Dashboards {
     dashboards: string[],
@@ -28,20 +28,20 @@ export function isDashboardData(arg: any): arg is DashboardData {
 
 export function getEmptyTemplate() {
     return {
-        id: generateId(),
-        version: CURRENT_TEMPLATE_VERSION,
+        id: generateId(DASHBOARD_PREFIX),
+        version: DASHBOARD_TEMPLATE_VERSION,
         name: 'Untitled',
         dashboard: []
     } as DashboardData;
 }
 
 export function getCuratedTemplate() {
-    const templateCopy = {...template};
-    templateCopy.id = generateId();
+    const templateCopy = {...dashboardTemplate};
+    templateCopy.id = generateId(DASHBOARD_PREFIX);
     return templateCopy;
 }
 
-export function getDefaultTemplate() {
+export function getDefaultDashboard() {
     const dashboards = getDashboards();
     if (dashboards.default) {
         return getDashboard(dashboards.default) || getEmptyTemplate();
@@ -112,22 +112,4 @@ export function saveDashboard(dashboard: DashboardData, defaultDashboard = false
         dashboards.default = dashboard.id;
         saveDashboards(dashboards);
     }
-}
-
-// Themes
-export interface Theme {
-    dark: boolean
-}
-
-export function getTheme() {
-    let themeDataString = localStorage.getItem(THEME);
-    if (!themeDataString) {
-        themeDataString = JSON.stringify({dark: true});
-        localStorage.setItem(THEME, themeDataString);
-    }
-    return JSON.parse(themeDataString) as Theme;
-}
-
-export function setTheme(dark: boolean) {
-    localStorage.setItem(THEME, JSON.stringify({dark: dark}))
 }

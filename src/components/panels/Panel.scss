@@ -4,8 +4,9 @@
     grid-template-rows: 60px 1fr;
     background: $bg-2;
     box-shadow: $shadow-1 2px 2px 4px;
-    border-radius: 12px;
+    border-radius: $panel-border-radius;
     margin: 10px;
+    overflow: hidden;
 
     .widget-hover-spots {
         position: absolute;
@@ -17,7 +18,7 @@
         opacity: 0.5;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
-        border-radius: 12px;
+        border-radius: $panel-border-radius;
         z-index: 2;
         overflow: hidden;
 
@@ -39,7 +40,7 @@
         grid-template-columns: 1fr 60px;
         background-color: $bg-1;
         box-shadow: $shadow-1 0px 2px 4px;
-        border-radius: 12px 12px 0px 0px;
+        border-radius: $panel-border-radius $panel-border-radius 0px 0px;
         z-index: 1;
 
         .widget-header-title {

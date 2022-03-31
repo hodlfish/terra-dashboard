@@ -1,10 +1,12 @@
 // Globals
-@import 'styles/_colors.scss';
+@import 'styles/_variables.scss';
 @import 'styles/_globals.scss';
 
 // Pages
 @import 'components/Dashboard.scss';
 @import 'components/About.scss';
+@import 'components/Settings.scss';
+@import 'components/ThemeSettings.scss';
 
 // Modals
 @import 'components/modals/Modal.scss';

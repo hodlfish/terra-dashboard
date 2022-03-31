@@ -71,7 +71,7 @@ function NativeTokenSupplyPanel(props: WidgetProps) {
                             </div>
                         )}
                     </div>
-                    <svg>
+                    <svg className="background-svg">
                         <use href="#terra"/>
                     </svg>
                 </div>

@@ -83,6 +83,10 @@ function AstroportContractPanel(props: WidgetProps) {
         return contracts.get(contractAddr)?.icon || '';
     }
 
+    const openCoinhall = () => {
+        window.open(`https://coinhall.org/charts/terra/${contractAddr}`, '_blank')
+    }
+
     return (
         <Panel
             title={getTitle()}
@@ -118,6 +122,9 @@ function AstroportContractPanel(props: WidgetProps) {
                                 <div>{formatNumber(getAssetLiquidity(1), true, decimals, true)}</div>
                             </div>
                         </div>
+                        <svg className="corner-icon" onClick={() => openCoinhall()}>
+                            <use href="#coinhall"/>
+                        </svg>
                     </div>
                     <img className="background-img" alt="Contract Icon" src={getIcon()} onError={hideImgOnError}/>
                 </div>

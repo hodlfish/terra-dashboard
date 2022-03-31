@@ -54,7 +54,7 @@ function LunaSupplyPanel(props: WidgetProps) {
                             <div className="data">{displayData?.communityPool}</div>
                         </div>
                     </div>
-                    <svg>
+                    <svg className="background-svg">
                         <use href="#luna"/>
                     </svg>
                 </div>

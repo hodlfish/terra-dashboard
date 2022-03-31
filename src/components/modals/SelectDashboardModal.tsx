@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 import { useGlobalState } from 'hooks/useGlobalState';
 import Modal from "./Modal";
 import TextBox from "../TextBox";
@@ -10,10 +10,10 @@ import {
     DashboardData,
     saveDashboards,
     getEmptyTemplate,
-    getDefaultTemplate,
+    getDefaultDashboard,
     isDashboardData,
     getCuratedTemplate
-} from 'scripts/LocalStorage';
+} from 'scripts/storage/dashboard-storage';
 import { generateId } from "scripts/Helpers";
 
 function SelectDashboardModal(props: any) {
@@ -52,7 +52,7 @@ function SelectDashboardModal(props: any) {
     const removeDashboard = (dashboard: DashboardData, e: any) => {
         e.stopPropagation();
         deleteDashboard(dashboard.id);
-        setSelectedDashboard(getDefaultTemplate() || getEmptyTemplate());
+        setSelectedDashboard(getDefaultDashboard() || getEmptyTemplate());
         setDashboards({...getDashboards()});
     }
 
@@ -153,21 +153,12 @@ function SelectDashboardModal(props: any) {
             </div>
             <div id="new-dashboard-buttons">
                 <div className="new-dashboard-button" onClick={createNewTemplate}>
-                    <svg height="24" width="24">
-                        <use href="#add"/>
-                    </svg>
                     <div>Empty</div>
                 </div>
                 <div className="new-dashboard-button" onClick={createCuratedTemplate}>
-                    <svg height="24" width="24">
-                        <use href="#add"/>
-                    </svg>
                     <div>Default</div>
                 </div>
                 <div className="new-dashboard-button" onClick={onUploadFileClicked}>
-                    <svg height="24" width="24">
-                        <use href="#upload"/>
-                    </svg>
                     <div>Import</div>
                     <input ref={inputFile} type='file' 
                         accept=".json"

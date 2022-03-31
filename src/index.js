@@ -4,6 +4,9 @@ import App from './App';
 import {
   BrowserRouter as Router
 } from 'react-router-dom';
+import InitializeChartJS from 'scripts/Graphing';
+
+InitializeChartJS();
 
 ReactDOM.render(
   <React.StrictMode>

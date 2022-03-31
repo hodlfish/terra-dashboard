@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Loading from "components/Loading";
-import { useGlobalState as useDragState, HoverLocation } from "./useDragState";
 import ClickAwayListener from "react-click-away-listener";
 import useIsMounted from "hooks/useIsMounted";
 import useInterval from "hooks/useInterval";
 import { MIN_REFRESH_RATE } from "components/widgets/common";
+import { useGlobalState } from "hooks/useGlobalState";
+
+export enum HoverLocation {
+    Left, Right, Center, None
+}  
 
 export interface WidgetProps {
     settings: any,
@@ -131,7 +135,7 @@ function Panel(props: PanelProps) {
     const [drag, setDrag] = useState<boolean>(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0});
-    const [dragging, setDragging] = useDragState('dragging');
+    const [dragging, setDragging] = useGlobalState('dragging');
     // NOTE: Using hoverSpot to highlight divs instead of onhover
     //       Safari does not recognize onhover selector while dragging.
     const [hoverLocation, setHoverLocation] = useState<HoverLocation>(HoverLocation.None)

@@ -33,10 +33,10 @@ function TextBox(props: TextBoxProps) {
 
     return (
         <ClickAwayListener onClickAway={() => setEditing(false)}>
-            <div id="text-box-component" >
+            <div id="text-box-component">
                 <form id="text-edit" className={!editing ? 'hidden' : ''} autoComplete="off" onSubmit={onFormSubmit}>
                     <input type="text" ref={inputEl} autoComplete="off" name="input" maxLength={maxChars} defaultValue={value}/>
-                    <button type="submit">
+                    <button type="submit"  onClick={(e) => e.stopPropagation()}>
                         <svg width="32" height="32" className="button-icon">
                             <use href="#save"/>
                         </svg>

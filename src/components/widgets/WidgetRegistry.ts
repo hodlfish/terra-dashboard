@@ -64,14 +64,14 @@ import * as MineOverviewSettings from './MineOverview/MineOverviewSettings';
 import MineProjectsPanel from "./MineProjects/MineProjectsPanel";
 import * as MineProjectsSettings from './MineProjects/MineProjectsSettings';
 
-import LoTerraJackpotPanel from "./LoTerraJackpot/LoTerraJackpotPanel";
-import * as LoTerraJackpotSettings from './LoTerraJackpot/LoTerraJackpotSettings';
-
 import SpectrumVaultsPanel from "./SpectrumVaults/SpectrumVaultsPanel";
 import * as SpectrumVaultsSettings from "./SpectrumVaults/SpectrumVaultsSettings";
 
 import LiquidityPoolPanel from "./LiquidityPool/LiquidityPoolPanel";
 import * as LiquidityPoolSettings from "./LiquidityPool/LiquidityPoolSettings";
+
+import AnchorLiquidationBidsPanel from "./AnchorLiquidationBids/AnchorLiquidationBids";
+import * as AnchorLiquidationBidsSettings from "./AnchorLiquidationBids/AnchorLiquidationBidsSettings";
 
 export interface RegisteredWidget {
     name: string,
@@ -282,14 +282,6 @@ const widgets = [
         defaultSettings: MineProjectsSettings.defaults
     },
     {
-        name: 'Jackpot',
-        group: groups.loTerra,
-        value: 'LoTerraJackpot',
-        component: LoTerraJackpotPanel,
-        settingsComponent: LoTerraJackpotSettings.SettingsPanel,
-        defaultSettings: LoTerraJackpotSettings.defaults
-    },
-    {
         name: 'Spectrum Vaults',
         group: groups.spectrum,
         value: 'SpectrumVaults',
@@ -304,6 +296,14 @@ const widgets = [
         component: LiquidityPoolPanel,
         settingsComponent: LiquidityPoolSettings.SettingsPanel,
         defaultSettings: LiquidityPoolSettings.defaults
+    },
+    {
+        name: 'Anchor Liquidation Bids',
+        group: groups.anchor,
+        value: 'AnchorLiquidationBids',
+        component: AnchorLiquidationBidsPanel,
+        settingsComponent: AnchorLiquidationBidsSettings.SettingsPanel,
+        defaultSettings: AnchorLiquidationBidsSettings.defaults
     }
 ].sort((a, b) => a.name.localeCompare(b.name)) as RegisteredWidget[];
 

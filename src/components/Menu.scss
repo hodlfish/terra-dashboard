@@ -1,9 +1,9 @@
 #menu-component {
     position: relative;
-    height: 60px;
     display: flex;
+    flex-wrap: wrap;
     align-content: center;
-    margin-left: 10px;
+    margin: 0px 10px;
 
     a {
         @include no-select;
@@ -23,5 +23,16 @@
         font-size: 16px;
         font-weight: bold;
         background-color: $bg-2;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #menu-component {
+        flex-direction: column;
+        width: 100%;
+
+        a {
+            width: 100%;
+        }
     }
 }

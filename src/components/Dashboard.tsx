@@ -1,15 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import AddWidgetModal from "./modals/AddWidgetModal";
-import { saveDashboard, getDashboard, getDashboards} from 'scripts/LocalStorage';
 import { useGlobalState, setGlobalState } from 'hooks/useGlobalState';
 import TextBox from './TextBox';
 import widgets from './widgets/WidgetRegistry';
 import WidgetMissingPanel from './widgets/WidgetMissing/WidgetMissingPanel';
 import WidgetErrorPanel from './widgets/WidgetError/WidgetErrorPanel';
-import { PanelEventProps } from './panels/Panel';
+import { HoverLocation, PanelEventProps } from './panels/Panel';
 import SelectDashboardModal from './modals/SelectDashboardModal';
 import ErrorBoundary from './widgets/WidgetError/ErrorBoundary';
-import { HoverLocation } from 'components/panels/useDragState';
+import { getDashboard, getDashboards, saveDashboard } from 'scripts/storage/dashboard-storage';
 
 function Dashboard() {
     const [selectedDashboard, setSelectedDashboard] = useGlobalState('selectedDashboard');
@@ -134,12 +133,10 @@ function Dashboard() {
             }
             <div id="dashboard-toolbar">
                 <div id="dashboard-toolbar-container">
-                    <div id="dashboard-title" className={showSaveIcon ? 'save-name' : ''}>
-                        <svg className="dashboard-tool" height="28" width="28" onClick={() => setDashboardModalOpen(true)}>
-                            <use href={"#hamburger"}/>
-                        </svg>
-                        <TextBox value={selectedDashboard.name} onUpdate={(newValue: string) => onSetDashboardName(newValue)}/>
-                    </div>
+                    <svg className="dashboard-tool" height="28" width="28" onClick={() => setDashboardModalOpen(true)}>
+                        <use href={"#hamburger"}/>
+                    </svg>
+                    <TextBox value={selectedDashboard.name} onUpdate={(newValue: string) => onSetDashboardName(newValue)}/>
                     <div id="dashboard-tools">
                         { showSaveIcon &&
                             <svg className="dashboard-tool" height="28" width="28" onClick={onSaveDashboard}>

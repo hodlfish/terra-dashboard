@@ -3,8 +3,8 @@ import { getMIRHistoricalPrices, getMIRPrice, MIRHistoricalPricePoint } from "sc
 import Panel, { WidgetProps } from "components/panels/Panel";
 import { Line } from "react-chartjs-2";
 import { defaults, Settings, SettingsPanel } from './MirrorPriceSettings';
-import { formatTimestamp, TimestampFormats, getStyleColor } from 'scripts/Helpers';
-import { defaultLineChartOptions } from "../common";
+import { formatTimestamp, TimestampFormats } from 'scripts/Helpers';
+import { defaultLineChartOptions, getGraphBackgroundColor, getGraphBorderColor } from "../common";
 
 function MirrorPricePanel(props: WidgetProps) {
     const {name, decimals} = Object.assign({...defaults}, props.settings as Settings);
@@ -26,8 +26,8 @@ function MirrorPricePanel(props: WidgetProps) {
             datasets: [
                 {
                     data: historicalData.map(d => d.price),
-                    backgroundColor: `${getStyleColor('icon-1')}44`,
-                    borderColor: getStyleColor('icon-2'),
+                    backgroundColor: getGraphBackgroundColor(),
+                    borderColor: getGraphBorderColor(),
                     fill: true
                 }
             ]

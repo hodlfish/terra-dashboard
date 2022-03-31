@@ -1,15 +1,23 @@
-import { TerraProposalStatus } from "scripts/Terra/Terra";
+import { Proposal } from "@terra-money/terra.js";
 import DataSource from "components/DataSource";
 import { sources } from "scripts/Settings";
 
 export const defaults = {
     name: 'Terra Proposals (Voting)',
-    filter: TerraProposalStatus.voting,
+    filter: Proposal.Status.PROPOSAL_STATUS_VOTING_PERIOD,
+}
+
+const ProposalStatusMap = {
+    'Deposit': Proposal.Status.PROPOSAL_STATUS_DEPOSIT_PERIOD,
+    'Voting': Proposal.Status.PROPOSAL_STATUS_VOTING_PERIOD,
+    'Passed': Proposal.Status.PROPOSAL_STATUS_PASSED,
+    'Rejected': Proposal.Status.PROPOSAL_STATUS_REJECTED,
+    'Failed': Proposal.Status.PROPOSAL_STATUS_FAILED
 }
 
 export interface Settings {
     name?: string,
-    filter?: string
+    filter?: number
 }
 
 interface SettingsPanelProps {
@@ -30,7 +38,7 @@ export function SettingsPanel(props: SettingsPanelProps) {
         const form = e.target
         const newSettings = {...props.settings};
         newSettings.name = form.name.value || undefined;
-        newSettings.filter = form.filter.value;
+        newSettings.filter = Number(form.filter.value);
         props.onUpdate(newSettings);
     }
 
@@ -41,8 +49,8 @@ export function SettingsPanel(props: SettingsPanelProps) {
             <input type="text" name="name" defaultValue={name}/>
             <label>Proposal Status</label>
             <select name="filter" defaultValue={filter.toString()}>
-                {Object.values(TerraProposalStatus).map(status => 
-                    <option key={status} value={status}>{status}</option>
+                {Object.entries(ProposalStatusMap).map(([name, value]) => 
+                    <option key={name} value={value}>{name}</option>
                 )}
             </select>
             <div id="settings-button-container">

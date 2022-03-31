@@ -3,8 +3,8 @@ import { getTerraAccounts } from "scripts/Terra/Terra";
 import Panel, { WidgetProps } from "components/panels/Panel";
 import { defaults, Settings, SettingsPanel, GraphFormats, GraphFilters } from './TerraTotalAccountsSettings';
 import { Line } from "react-chartjs-2";
-import { formatTimestamp, TimestampFormats, getStyleColor } from 'scripts/Helpers';
-import { defaultLineChartOptions } from "../common";
+import { formatTimestamp, TimestampFormats } from 'scripts/Helpers';
+import { defaultLineChartOptions, getGraphBackgroundColor, getGraphBorderColor } from "../common";
 
 function TerraTotalAccountsPanel(props: WidgetProps) {
     const {name, filter, format, timeSpan} = Object.assign({...defaults}, props.settings as Settings);
@@ -40,8 +40,8 @@ function TerraTotalAccountsPanel(props: WidgetProps) {
                 {
                     label: 'Total Accounts',
                     data: data.map((d: any) => (parseInt(d.value))),
-                    backgroundColor: `${getStyleColor('icon-1')}44`,
-                    borderColor: getStyleColor('icon-2'),
+                    backgroundColor: getGraphBackgroundColor(),
+                    borderColor: getGraphBorderColor(),
                     fill: true
                 }
             ]

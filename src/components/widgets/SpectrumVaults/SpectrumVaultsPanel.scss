@@ -5,7 +5,7 @@
 
     #spectrum-vaults-labels {
         display: grid;
-        grid-template-columns: 60px 1fr 1fr 1fr;
+        grid-template-columns: 60px 1fr 1fr 1fr 1fr;
         box-shadow: $shadow-1 0px 2px 4px;
 
         div {
@@ -20,11 +20,11 @@
 
         .spectrum-vault-container {
             display: grid;
-            grid-template-columns: 60px 1fr 1fr 1fr;
+            grid-template-columns: 60px 1fr 1fr 1fr 1fr;
             height: 60px;
 
             &:nth-child(odd) {
-                background-color: $bg-1;
+                background-color: $bg-3;
             }
     
             img {
