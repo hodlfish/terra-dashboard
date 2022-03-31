@@ -5,7 +5,7 @@ import { templates as themeTemplates } from "templates/ThemeDefaults";
 export const THEMES = 'themes';
 export const THEME_PREFIX = 'theme';
 export const THEME_TEMPLATE_VERSION = 'v0.1';
-const FALLBACK_THEME = themeTemplates.dark;
+export const FALLBACK_THEME = themeTemplates.dark;
 
 export interface Themes {
     themes: string[],
@@ -19,8 +19,25 @@ export interface ThemeData {
     settings: { [name: string]: string }
 }
 
-export function duplicateTheme(theme: ThemeData) {
+export function isThemeData(arg: any): arg is ThemeData {
+    return (arg 
+        && arg.id && typeof(arg.id) == 'string'
+        && arg.version && typeof(arg.version) == 'string'
+        && arg.name && typeof(arg.name) == 'string'
+        && arg.settings
+    );
+}
+
+export function duplicateTheme(theme: ThemeData, name?: string) {
     const newTheme = {...theme};
+    newTheme.id = generateId(THEME_PREFIX);
+    newTheme.name = (name !== undefined) ? name : 'New Theme';
+    saveTheme(newTheme);
+    return newTheme;
+}
+
+export function getEmptyTheme() {
+    const newTheme = {...FALLBACK_THEME};
     newTheme.id = generateId(THEME_PREFIX);
     newTheme.name = 'New Theme';
     saveTheme(newTheme);

@@ -1,6 +1,7 @@
 // Globals
 @import 'styles/_variables.scss';
 @import 'styles/_globals.scss';
+@import 'styles/_styles.scss';
 
 // Pages
 @import 'components/Dashboard.scss';
@@ -11,7 +12,6 @@
 // Modals
 @import 'components/modals/Modal.scss';
 @import 'components/modals/AddWidgetModal.scss';
-@import 'components/modals/SelectDashboardModal.scss';
 
 // Components
 @import 'components/Loading.scss';

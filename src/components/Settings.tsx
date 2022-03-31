@@ -13,12 +13,6 @@ function Settings() {
                     <ThemeSettings/>
                 </div>
             </div>
-            <div className="settings-item">
-                <div className="settings-item-title">Data Management</div>
-                <div className="settings-item-content">
-                    TODO
-                </div>
-            </div>
         </div>
     </div>
   );

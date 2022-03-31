@@ -1,72 +1,28 @@
 #theme-settings-component {
-    .theme {
-        background-color: $bg-3;
-        border-radius: $panel-border-radius;
-        box-shadow: $shadow-1 0px 2px 4px;
-        margin: 12px;
-        overflow: hidden;
+    .theme-settings {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 12px;
+        justify-content: center;
 
-        .theme-header {
-            cursor: pointer;
+        .setting-item {
+            border-radius: $panel-border-radius;
             display: grid;
-            grid-template-columns: 1fr min-content;
-            height: 60px;
-            padding-left: 10px;
-
-            .theme-title {
-                cursor: pointer;
-                margin: auto 0px;
-                font-weight: bold;
-                font-size: 24px;
-            }
-
-            .theme-toolbar {
-                display: flex;
-
-                .toolbar-item {
-                    fill: $icon-1;
-                    margin: auto 10px;
-                    cursor: pointer;
-
-                    &:hover {
-                        fill: $icon-2;
-                    }
-                }
-            }
-        }
-
-        .theme-settings {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 12px;
-            justify-content: center;
-
-            .setting-item {
-                border-radius: $panel-border-radius;
-                display: grid;
-                grid-template-rows: 16px min-content;
-                background-color: $bg-2;
-                box-shadow: $shadow-1 0px 2px 4px;
-                padding: 12px;
-                margin: 6px;
-
-                .setting-item-title {
-                    font-size: 16px;
-                    font-weight: bold;
-                    text-align: center;
-                }
-
-                .setting-item-tool {
-                    margin: 6px auto;
-                }
-            }
-        }
-    }
-
-    .theme.selected {
-        .theme-header {
-            background-color: $bg-1;
+            grid-template-rows: 16px min-content;
+            background-color: $bg-2;
             box-shadow: $shadow-1 0px 2px 4px;
+            padding: 12px;
+            margin: 6px;
+
+            .setting-item-title {
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .setting-item-tool {
+                margin: 6px auto;
+            }
         }
     }
 }

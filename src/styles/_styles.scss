@@ -1,0 +1,63 @@
+// Item List
+.list-item {
+    background-color: $bg-3;
+    border-radius: $panel-border-radius;
+    box-shadow: $shadow-1 0px 2px 4px;
+    margin: 12px;
+    overflow: hidden;
+
+    .list-item-header {
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: 1fr min-content;
+        height: 60px;
+        padding-left: 10px;
+
+        .list-item-title {
+            cursor: pointer;
+            margin: auto 0px;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .list-item-toolbar {
+            display: flex;
+
+            .toolbar-item {
+                fill: $icon-1;
+                margin: auto 10px;
+                cursor: pointer;
+
+                &:hover {
+                    fill: $icon-2;
+                }
+            }
+        }
+    }
+}
+
+.list-item.selected {
+    .list-item-header {
+        background-color: $bg-1;
+        box-shadow: $shadow-1 0px 2px 4px;
+    }
+}
+
+.list-item-footer {
+    display: flex;
+    flex-wrap: wrap;
+
+    .footer-button {
+        flex: 1 1 0px;
+        height: 60px;
+        margin: 10px 10px;
+        border-radius: $panel-border-radius;
+        background-color: $bg-3;
+        display: grid;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        box-shadow: $shadow-1 0px 2px 4px;
+    }
+}

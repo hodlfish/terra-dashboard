@@ -2,6 +2,7 @@ import {useState, useEffect, useRef} from "react";
 import { useGlobalState } from 'hooks/useGlobalState';
 import Modal from "./Modal";
 import TextBox from "../TextBox";
+import { downloadJSON } from "scripts/Helpers";
 import {
     getDashboard,
     getDashboards,
@@ -12,9 +13,9 @@ import {
     getEmptyTemplate,
     getDefaultDashboard,
     isDashboardData,
-    getCuratedTemplate
+    getCuratedTemplate,
+    duplicateDashboard
 } from 'scripts/storage/dashboard-storage';
-import { generateId } from "scripts/Helpers";
 
 function SelectDashboardModal(props: any) {
     const inputFile = useRef<any>();
@@ -31,14 +32,14 @@ function SelectDashboardModal(props: any) {
         }
     }, [dashboards]);
 
-    const createNewTemplate = () => {
+    const onCreateNewDashboard = () => {
         const newTemplate = getEmptyTemplate();
         saveDashboard(newTemplate);
         setSelectedDashboard(newTemplate);
         setDashboards({...getDashboards()});
     }
 
-    const createCuratedTemplate = () => {
+    const onCreateDefaultDashboard = () => {
         const newTemplate = getCuratedTemplate();
         saveDashboard(newTemplate);
         setSelectedDashboard(newTemplate);
@@ -49,15 +50,14 @@ function SelectDashboardModal(props: any) {
         setSelectedDashboard(dashboard);
     }
 
-    const removeDashboard = (dashboard: DashboardData, e: any) => {
-        e.stopPropagation();
+    const removeDashboard = (dashboard: DashboardData) => {
         deleteDashboard(dashboard.id);
         setSelectedDashboard(getDefaultDashboard() || getEmptyTemplate());
         setDashboards({...getDashboards()});
     }
 
     const getClass = (dashboard: DashboardData) => {
-        let className = 'dashboard-list-item';
+        let className = 'list-item';
         if (selectedDashboard.id === dashboard.id) {
             className += ' selected';
         }
@@ -68,23 +68,14 @@ function SelectDashboardModal(props: any) {
         return dashboards.default === dashboard.id;
     }
 
-    const onSetDefault = (dashboard: DashboardData, e: any) => {
-        e.stopPropagation();
+    const onSetDefault = (dashboard: DashboardData) => {
         dashboards.default = dashboard.id;
         saveDashboards({...dashboards});
         setDashboards({...dashboards});
     }
 
-    const onDownloadDashboard = (dashboard: DashboardData, e: any) => {
-        e.stopPropagation();
-        const json = JSON.stringify(dashboard, null, 4);
-        const blob = new Blob([json],{type:'application/json'});
-        const href = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = href;
-        link.download = `${dashboard.name}.json`;
-        document.body.appendChild(link);
-        link.click();
+    const onDownloadDashboard = (dashboard: DashboardData) => {
+        downloadJSON(dashboard.name, dashboard);
     }
 
     const onUploadFileClicked = () => {
@@ -100,14 +91,13 @@ function SelectDashboardModal(props: any) {
             const reader = new FileReader();
             reader.onload = (data => {
                 try {
-                    const uploadedDashboard = JSON.parse(data.target?.result as string) as DashboardData;
+                    let uploadedDashboard = JSON.parse(data.target?.result as string) as DashboardData;
                     const valid = isDashboardData(uploadedDashboard);
                     if (!valid) {
                         alert('Invalid dashboard JSON.')
                         return;
                     }
-                    uploadedDashboard.id = generateId();
-                    saveDashboard(uploadedDashboard);
+                    uploadedDashboard = duplicateDashboard(uploadedDashboard, uploadedDashboard.name);
                     setDashboards({...getDashboards()});
                     onSelectDashboard(uploadedDashboard);
                 } catch (error) {
@@ -131,35 +121,33 @@ function SelectDashboardModal(props: any) {
     return (
         <Modal onClose={props.onClose} className={'select-dashboard-modal-component modal-three-sections'}>
             <div id="title">Dashboards</div>
-            <div id="content">
+            <div style={{overflow: 'auto'}}>
                 { dashboardList.map(dashboard => 
                     <div className={getClass(dashboard)} key={dashboard.id} onClick={() => onSelectDashboard(dashboard)}>
-                        <div className="dashboard-title">
-                            <TextBox value={dashboard.name} onUpdate={(newName: string) => onSetDashboardName(dashboard, newName)}/>
-                        </div>
-                        <div className="dashboard-icons">
-                            <svg height="28" width="28" onClick={(e) => onDownloadDashboard(dashboard, e)}>
-                                <use href="#download"/>
-                            </svg>
-                            <svg height="28" width="28" onClick={(e) => onSetDefault(dashboard, e)}>
-                                <use href={isDefault(dashboard) ? "#star-filled" : "#star-empty"}/>
-                            </svg>
-                            <svg height="28" width="28" onClick={(e) => removeDashboard(dashboard, e)}>
-                                <use href="#trash"/>
-                            </svg>
+                        <div className="list-item-header">
+                            <div className="list-item-title">
+                                <TextBox value={dashboard.name} onUpdate={(newName: string) => onSetDashboardName(dashboard, newName)}/>
+                            </div>
+                            <div className="list-item-toolbar" onClick={(e) => e.stopPropagation()}>
+                                <svg className="toolbar-item" height="28" width="28" onClick={() => onDownloadDashboard(dashboard)}>
+                                    <use href="#download"/>
+                                </svg>
+                                <svg className="toolbar-item" height="28" width="28" onClick={() => onSetDefault(dashboard)}>
+                                    <use href={isDefault(dashboard) ? "#star-filled" : "#star-empty"}/>
+                                </svg>
+                                <svg className="toolbar-item" height="28" width="28" onClick={() => removeDashboard(dashboard)}>
+                                    <use href="#trash"/>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 )}
             </div>
-            <div id="new-dashboard-buttons">
-                <div className="new-dashboard-button" onClick={createNewTemplate}>
-                    <div>Empty</div>
-                </div>
-                <div className="new-dashboard-button" onClick={createCuratedTemplate}>
-                    <div>Default</div>
-                </div>
-                <div className="new-dashboard-button" onClick={onUploadFileClicked}>
-                    <div>Import</div>
+            <div className="list-item-footer">
+                <div className="footer-button" onClick={onCreateNewDashboard}>Empty</div>
+                <div className="footer-button" onClick={onCreateDefaultDashboard}>Default</div>
+                <div className="footer-button" onClick={onUploadFileClicked}>
+                    Import
                     <input ref={inputFile} type='file' 
                         accept=".json"
                         style={{display: 'none'}} 

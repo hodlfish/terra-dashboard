@@ -52,6 +52,14 @@ export function getDefaultDashboard() {
     }
 }
 
+export function duplicateDashboard(dashboard: DashboardData, name?: string) {
+    const newDashboard = {...dashboard};
+    newDashboard.id = generateId(DASHBOARD_PREFIX);
+    newDashboard.name = (name !== undefined) ? name : 'New Dashboard';
+    saveDashboard(newDashboard);
+    return newDashboard;
+}
+
 export function getDashboards(): Dashboards {
     const dashboardDataString = localStorage.getItem(DASHBOARDS);
     if (dashboardDataString === null) {
