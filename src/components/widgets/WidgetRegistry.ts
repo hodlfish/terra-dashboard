@@ -73,6 +73,9 @@ import * as LiquidityPoolSettings from "./LiquidityPool/LiquidityPoolSettings";
 import AnchorLiquidationBidsPanel from "./AnchorLiquidationBids/AnchorLiquidationBids";
 import * as AnchorLiquidationBidsSettings from "./AnchorLiquidationBids/AnchorLiquidationBidsSettings";
 
+import CalculatorPanel from "./Calculator/CalculatorPanel";
+import * as CalculatorSettings from "./Calculator/CalculatorSettings";
+
 export interface RegisteredWidget {
     name: string,
     group: string,
@@ -304,6 +307,14 @@ const widgets = [
         component: AnchorLiquidationBidsPanel,
         settingsComponent: AnchorLiquidationBidsSettings.SettingsPanel,
         defaultSettings: AnchorLiquidationBidsSettings.defaults
+    },
+    {
+        name: 'Calculator',
+        group: groups.utility,
+        value: 'Calculator',
+        component: CalculatorPanel,
+        settingComponent: CalculatorSettings.SettingsPanel,
+        defaultSettings: CalculatorSettings.defaults
     }
 ].sort((a, b) => a.name.localeCompare(b.name)) as RegisteredWidget[];
 

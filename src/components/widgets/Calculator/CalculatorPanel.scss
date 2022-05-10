@@ -1,0 +1,13 @@
+#calculator-component {
+    margin-top: 12px;
+
+    .title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .value-grid-horizontal {
+        display: flex;
+        gap: 12px;
+    }
+}
