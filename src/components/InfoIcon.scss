@@ -1,4 +1,5 @@
 #info-icon-component {
+    display: inline;
     position: relative;
 
     svg {
@@ -17,9 +18,11 @@
     div {
         display: none;
         position: absolute;
+        width: 200px;
         max-width: 200px;
         padding: 9px;
         border-radius: 6px;
+        font-size: 16px;
         background-color: $bg-3;
         box-shadow: $shadow-1 2px 2px 4px;
     }
